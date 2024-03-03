@@ -1,0 +1,2924 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BooksExchanger</name>
+    </assembly>
+    <members>
+        <member name="T:BooksExchanger.Attributes.Auth.AdminAuthorizeAttribute">
+            <summary>
+            Атрибут авторизации с правами админа.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Attributes.Auth.AdminAuthorizeAttribute.OnAuthorization(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)">
+            <summary>
+            Проверка авторизации админа.
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:BooksExchanger.Attributes.Auth.UserAuthorizeAttribute">
+            <summary>
+            Атрибут авторизации пользователя.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Attributes.Auth.UserAuthorizeAttribute.OnAuthorization(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)">
+            <summary>
+            Проверка авторизации пользователя.
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:BooksExchanger.Controllers.AuthorsController">
+            <summary>
+            Контроллер авторов.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Controllers.AuthorsController.Create(BooksExchanger.Controllers.Specs.Authors.CreateAuthorRequest)">
+            <summary>
+            Создает нового автора.
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="403">Пользователь не является админом.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.AuthorsController.UpdateAuthor(BooksExchanger.Controllers.Specs.Authors.UpdateAuthorRequest)">
+            <summary>
+            Редактирует автора по id.
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="403">Пользователь не является админом.</response>
+            <response code="404">Автора с таким id не существует.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.AuthorsController.GetAuthors">
+            <summary>
+            Отдает всех существующих авторов.
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="403">Пользователь не является админом.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.AuthorsController.RemoveAuthor(System.Int64)">
+            <summary>
+            Удаляет автора по id.
+            </summary>
+            <param name="authorId">id автора.</param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="403">Пользователь не является админом.</response>
+            <response code="404">Автора не существует.</response>
+            <response code="409">К данному автору привязаны книги.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.AuthorsController.SearchAuthorsByName(System.String)">
+            <summary>
+            Осуществляет поиск авторов.
+            </summary>
+            <param name="authorName">Начало ФИО автора.</param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="403">Пользователь не является админом.</response>
+        </member>
+        <member name="T:BooksExchanger.Controllers.BooksController">
+            <summary>
+            Контроллер книг.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Controllers.BooksController.Create(BooksExchanger.Controllers.Specs.Books.CreateBookRequest)">
+            <summary>
+            Создает новую книгу.
+            </summary>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="403">Пользователь не является админом.</response>
+            <response code="409">Не существует указанных авторов или жанра.</response>
+            <response code="500">Неизвестная ошибка.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.BooksController.Update(BooksExchanger.Controllers.Specs.Books.UpdateBookRequest)">
+            <summary>
+            Редактирует существующую книгу.
+            </summary>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="403">Пользователь не является админом.</response>
+            <response code="404">Не найдено книги.</response>
+            <response code="409">Не существует указанных авторов или жанра.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.BooksController.GetBooks(System.Nullable{System.Int64})">
+            <summary>
+            Получение списка существующих книг.
+            </summary>
+            <param name="bookId">id книги. Можно использовать для получения конкретной книги.</param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="403">Пользователь не является админом.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.BooksController.RemoveBook(System.Int64)">
+            <summary>
+            Удаляет книгу.
+            </summary>
+            <param name="bookId">id книги</param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="403">Пользователь не является админом.</response>
+            <response code="404">Книга не найдена.</response>
+            <response code="409">Нельзя удалить книгу, потому что к ней привязаны офферы или отзывы.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.BooksController.SearchBooksByName(System.String)">
+            <summary>
+            Осущствляет поиск книг по названию.
+            </summary>
+            <param name="bookTitle">Начало названия книги</param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="403">Пользователь не является админом.</response>
+        </member>
+        <member name="T:BooksExchanger.Controllers.ChatController">
+            <summary>
+            Контроллер чатов.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Controllers.ChatController.GetChats">
+            <summary>
+            Отдает все чаты пользователя.
+            </summary>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="401">Пользователь не авторизован.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.ChatController.GetChatWithMessages(System.Int64)">
+            <summary>
+            Получения конкретного чата вместе с сообщениями.
+            Если чата не существует, создается новый.
+            </summary>
+            <param name="userId">id собеседника</param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="404">Получатель не найден.</response>
+        </member>
+        <member name="T:BooksExchanger.Controllers.FeedbacksConstroller">
+            <summary>
+            Контроллер отзывов.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Controllers.FeedbacksConstroller.AddFeedback(System.Guid,BooksExchanger.Controllers.Specs.Offers.AddFeedbackRequest)">
+            <summary>
+            Добавляет отзыв к офферу или редактирует старый (если отзыв уже есть).
+            </summary>
+            <param name="offerId">id оффера.</param>
+            <param name="request">запрос.</param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Не указан ни отзыв, ни оценка.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="404">Не найдено отзыва.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.FeedbacksConstroller.GetFeedbacks(System.Guid)">
+            <summary>
+            Возвращает все отзывы для заданного оффера.
+            Если пользователь авторизирован, то его отзыв возвращается отдельно от остальных.
+            </summary>
+            <param name="offerId">id оффера.</param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.FeedbacksConstroller.RemoveFeedback(System.Int64)">
+            <summary>
+            Удаляет отзыв.
+            </summary>
+            <param name="offerId"></param>
+            <param name="feedbackId"></param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="404">Не найдено оффера или отзыва.</response>
+            <response code="403">Пользователь не является автором отзыва.</response>
+        </member>
+        <member name="T:BooksExchanger.Controllers.GenresController">
+            <summary>
+            Контроллер жанров.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Controllers.GenresController.CreateGenre(BooksExchanger.Models.Requests.AddGenreRequest)">
+            <summary>
+            Создает новый жанр.
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="403">Пользователь не является админом.</response>
+            <response code="409">Жанр с таким именем уже существует.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.GenresController.UpdateGenre(BooksExchanger.Controllers.Specs.Genres.UpdateGenresRequest)">
+            <summary>
+            Редактирует существующий жанр.
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="403">Пользователь не является админом.</response>
+            <response code="404">Жанр с таким id не существует.</response>
+            <response code="409">Жанр с таким именем уже существует.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.GenresController.GetGenres">
+            <summary>
+            Возвращает все существующие жанры.
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="403">Пользователь не является админом.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.GenresController.RemoveGenres(System.Int32)">
+            <summary>
+            Удаляет жанр.
+            </summary>
+            <param name="genreId">id жанра</param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="403">Пользователь не является админом.</response>
+            <response code="404">Жанр не найден.</response>
+            <response code="409">К жанру привязаны книги.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.GenresController.SearchGenres(System.String)">
+            <summary>
+            Осуществляет поиск жанров.
+            </summary>
+            <param name="genreName">Начало названия жанра.</param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="403">Пользователь не является админом.</response>
+        </member>
+        <member name="T:BooksExchanger.Controllers.OffersCollectorController">
+            <summary>
+            Контроллер офферов на модрации.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Controllers.OffersCollectorController.CreateOffer(BooksExchanger.Controllers.Specs.OffersCollector.CreateOfferRequest)">
+            <summary>
+            Отправляет оффер на модерацию.
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.OffersCollectorController.RejectOffer(BooksExchanger.Controllers.Specs.OffersCollector.RejectOfferRequest)">
+            <summary>
+            Отклоняет оффер при модерации.
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="403">Пользователь не является админом.</response>
+            <response code="404">Оффер не найден.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.OffersCollectorController.ApproveOffer(BooksExchanger.Controllers.Specs.OffersCollector.ApproveOfferRequest)">
+            <summary>
+            Подтверждает оффер при модерации.
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="403">Пользователь не является админом.</response>
+            <response code="404">Оффер не найден или книга не найдена.</response>
+            <response code="409">Оффер уже подтвержден.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.OffersCollectorController.GetOffers(System.Nullable{System.Guid},System.Nullable{System.Boolean})">
+            <summary>
+            Возвращает офферы для модерации.
+            </summary>
+            <param name="offerId">id оффера, если нужно вернуть конкретный оффер.</param>
+            <param name="considerationOnly">Вернуть только офферы, которые ждут модерации.</param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="403">Пользователь не является админом.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.OffersCollectorController.GetRejectedOffers">
+            <summary>
+            Возвращает отклоненные офферы пользователя.
+            </summary>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.OffersCollectorController.GetConsiderationOffers">
+            <summary>
+            Возвращает офферы пользователя, находящиеся в статусе модерации.
+            </summary>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.OffersCollectorController.RemoveOffer(System.Guid)">
+            <summary>
+            Удаляет оффер, находящийся на модерации.
+            </summary>
+            <param name="offerId">id оффера</param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="403">Пользователь не является владельцем объявления.</response>
+            <response code="404">Оффер не найден.</response>
+        </member>
+        <member name="T:BooksExchanger.Controllers.OffersController">
+            <summary>
+            Контроллер офферов.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Controllers.OffersController.GetOffer(System.Guid)">
+            <summary>
+            Возвращает оффер по id.
+            </summary>
+            <param name="offerId">id оффера.</param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="404">Оффер не найден.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.OffersController.GetOffers(System.Nullable{System.Int32},System.String,System.Nullable{System.Int64})">
+            <summary>
+            Возвращает офферы, подходящие под заданные фильтры.
+            </summary>
+            <param name="genreId">id жанра.</param>
+            <param name="city">Название города.</param>
+            <param name="userId">id владельца..</param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.OffersController.MarkOfferFavorite(System.Guid)">
+            <summary>
+            Добавляет оффер в избранное пользователя.
+            </summary>
+            <param name="offerId">id оффера.</param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="404">Не найдено оффера.</response>
+            <response code="409">Отзыв уже добавлен в избранное.</response>
+            <response code="500">Неизвестная ошибка.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.OffersController.RemoveOfferFromFavorite(System.Guid)">
+            <summary>
+            Удаляет оффер из избранного пользователя.
+            </summary>
+            <param name="offerId">id оффера.</param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="404">Оффер не находится в избранном пользователя.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.OffersController.RemoveOffer(System.Guid)">
+            <summary>
+            Удаляет оффер.
+            </summary>
+            <param name="offerId">id оффера</param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="403">Пользователь не является владельцем объявления.</response>
+            <response code="404">Оффер не найден.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.OffersController.GetFavoriteOffers">
+            <summary>
+            Получение избранных офферов пользователя.
+            </summary>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.OffersController.GetOffersSelections(System.String)">
+            <summary>
+            Возвращает подборки книг для главной приложения.
+            Может фильтровать по городу.
+            </summary>
+            <param name="city">Название города.</param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+        </member>
+        <member name="T:BooksExchanger.Controllers.SearchController">
+            <summary>
+            Контроллер поиска.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Controllers.SearchController.SearchByTitle(System.String)">
+            <summary>
+            Осуществляет поиск офферов по названию книги.
+            </summary>
+            <param name="title">Начало названия книги.</param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.SearchController.SearchByAuthors(System.String)">
+            <summary>
+            Осуществляет поиск офферов по авторам.
+            </summary>
+            <param name="title">Начало имени автора.</param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Authors.CreateAuthorRequest">
+            <summary>
+            Запрос на создание автора.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Authors.CreateAuthorRequest.Name">
+            <summary>
+            ФИО автора
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Authors.CreateAuthorResponse">
+            <summary>
+            Модель ответа для создания автора.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Authors.CreateAuthorResponse.Id">
+            <summary>
+            Id созданного автора.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Authors.GetAuthorsResponse">
+            <summary>
+            Модель ответа для получения авторов.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Authors.GetAuthorsResponse.Authors">
+            <summary>
+            Список авторов.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Authors.UpdateAuthorRequest">
+            <summary>
+            Модель запроса для редактирования автора.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Authors.UpdateAuthorRequest.Id">
+            <summary>
+            Id автора.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Authors.UpdateAuthorRequest.NewName">
+            <summary>
+            Новое ФИО для автора.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Authors.UpdateAuthorResponse">
+            <summary>
+            Модель ответа для редактирования автора.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Authors.UpdateAuthorResponse.Id">
+            <summary>
+            Id автора.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Books.CreateBookRequest">
+            <summary>
+            Модель запроса для создания книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Books.CreateBookRequest.Title">
+            <summary>
+            Название книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Books.CreateBookRequest.GenreId">
+            <summary>
+            id жанра.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Books.CreateBookRequest.AuthorIds">
+            <summary>
+            id авторов книг.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Books.CreateBookResponse">
+            <summary>
+            Модель ответа создания книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Books.CreateBookResponse.Id">
+            <summary>
+            Id книги.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Books.GetBooksResponse">
+            <summary>
+            Модель запроса для получения книг.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Books.GetBooksResponse.Books">
+            <summary>
+            Информация о запрашиваемых книгах.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Books.UpdateBookRequest">
+            <summary>
+            Модель запроса для редактирования книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Books.UpdateBookRequest.BookId">
+            <summary>
+            Id книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Books.UpdateBookRequest.Title">
+            <summary>
+            Название книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Books.UpdateBookRequest.GenreId">
+            <summary>
+            Id жанра.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Books.UpdateBookRequest.AuthorIds">
+            <summary>
+            id авторов.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Books.UpdateBookResponse">
+            <summary>
+            Модель ответа редактирования книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Books.UpdateBookResponse.Id">
+            <summary>
+            Id книги.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Chats.GetChatResponse">
+            <summary>
+            Модель ответа получения чата.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Chats.GetChatResponse.ChatId">
+            <summary>
+            id чата.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Chats.GetChatResponse.UserName">
+            <summary>
+            Имя собеседника
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Chats.GetChatResponse.UserId">
+            <summary>
+            Id собеседника
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Chats.GetChatResponse.Messages">
+            <summary>
+            Сообщения.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Chats.GetChatsResponse">
+            <summary>
+            Модель ответа получения чатов.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Chats.GetChatsResponse.Chats">
+            <summary>
+            Информация о чатах.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Common.Author">
+            <summary>
+            Модель автора.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Author.Id">
+            <summary>
+            id автора.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Author.Name">
+            <summary>
+            ФИО автора.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Common.Book">
+            <summary>
+            Модель книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Book.Id">
+            <summary>
+            id книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Book.Title">
+            <summary>
+            Название книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Book.Genre">
+            <summary>
+            Жанр книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Book.Authors">
+            <summary>
+            Информаиця об авторах книги.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Common.Chat">
+            <summary>
+            Модель чата.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Chat.Id">
+            <summary>
+            Id чата.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Chat.UserName">
+            <summary>
+            Имя собеседника.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Chat.LastMessage">
+            <summary>
+            Последнее отправленное сообщение.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Chat.UserId">
+            <summary>
+            id собеседника.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Common.Feedback">
+            <summary>
+            Модель отзыва.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Feedback.Id">
+            <summary>
+            id отзыва.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Feedback.UserName">
+            <summary>
+            Имя автора отзыва.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Feedback.CreatedAt">
+            <summary>
+            Дата и время создания отзыва.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Feedback.Value">
+            <summary>
+            Текс отзыва.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Feedback.Estimation">
+            <summary>
+            Оценка книги по мнению пользователя (от 1 до 5).
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Common.Genre">
+            <summary>
+            Модель жанра.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Genre.Id">
+            <summary>
+            id жанра.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Genre.Name">
+            <summary>
+            Наименование жанра.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Common.Message">
+            <summary>
+            Модель сообщения.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Message.Id">
+            <summary>
+            Id 
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Message.Text">
+            <summary>
+            Текс сообщения.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Message.IsUserSender">
+            <summary>
+            Флаг, что это сообщение текущего пользователя (для окрашивания сообщений разными цветами)
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Message.UserId">
+            <summary>
+            Id автора сообщения
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Message.SentAt">
+            <summary>
+            Дата и время отправки сообщения
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Common.ModerationStatus">
+            <summary>
+            Модель статусов модерации оффера.
+            </summary>
+        </member>
+        <member name="F:BooksExchanger.Controllers.Specs.Common.ModerationStatus.Submitted">
+            <summary>
+            Отправлен.
+            </summary>
+        </member>
+        <member name="F:BooksExchanger.Controllers.Specs.Common.ModerationStatus.Consideration">
+            <summary>
+            На рассмотрении.
+            </summary>
+        </member>
+        <member name="F:BooksExchanger.Controllers.Specs.Common.ModerationStatus.Approved">
+            <summary>
+            Подтвержден.
+            </summary>
+        </member>
+        <member name="F:BooksExchanger.Controllers.Specs.Common.ModerationStatus.Rejected">
+            <summary>
+            Отклонен.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Common.Offer">
+            <summary>
+            Модель оффера.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Offer.Id">
+            <summary>
+            id оффера.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Offer.Title">
+            <summary>
+            Название книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Offer.Description">
+            <summary>
+            Описание оффера.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Offer.Price">
+            <summary>
+            Цена.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Offer.City">
+            <summary>
+            Город.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Offer.Picture">
+            <summary>
+            Загрузочная ссылка на картинку.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Offer.Genre">
+            <summary>
+            Информация о жанре.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Offer.Authors">
+            <summary>
+            Список авторов.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Offer.Owner">
+            <summary>
+            Информация о владельце.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Offer.CreatedAt">
+            <summary>
+            Дата и время создания.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Offer.BookRating">
+            <summary>
+            Рейтинг книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Offer.IsFavoriteForUser">
+            <summary>
+            Находится ли оффер в избранном пользователя (чтобы отобрадажать это).
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Common.OfferCollector">
+            <summary>
+            Модель оффера на модерации.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.OfferCollector.Id">
+            <summary>
+            Id оффера.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.OfferCollector.Title">
+            <summary>
+            Название книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.OfferCollector.Description">
+            <summary>
+            Описание оффера.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.OfferCollector.Owner">
+            <summary>
+            Информация о владельце.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.OfferCollector.Authors">
+            <summary>
+            Информация об авторах.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.OfferCollector.Price">
+            <summary>
+            Цена.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.OfferCollector.ModerationStatus">
+            <summary>
+            Статус модерации
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.OfferCollector.City">
+            <summary>
+            Город публикации.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.OfferCollector.Picture">
+            <summary>
+            Ссылка на картинку.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.OfferCollector.CreatedAt">
+            <summary>
+            Дата и время создания.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.OfferCollector.RegectReason">
+            <summary>
+            Причина отказа (при наличии).
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Common.Owner">
+            <summary>
+            Модель владельца объявления.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Owner.Id">
+            <summary>
+            id пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Owner.Name">
+            <summary>
+            Имя пользователя.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Common.Selection">
+            <summary>
+            Подель книжной подборки.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Selection.Title">
+            <summary>
+            Название подборки.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Common.Selection.Offers">
+            <summary>
+            Офферы.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.ErrorResponse">
+            <summary>
+            Модель ответа с ошибкой.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.ErrorResponse.Message">
+            <summary>
+            Сообщение об ошибке.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Genres.CreateUpdateGenreResponse">
+            <summary>
+            Модель ответа создания или редактирования жанра.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Genres.CreateUpdateGenreResponse.Id">
+            <summary>
+            Id жанра.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Genres.GetGenresResponse">
+            <summary>
+            Модель ответа получения жанров.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Genres.GetGenresResponse.Genres">
+            <summary>
+            Информация о жанрах.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Genres.UpdateGenresRequest">
+            <summary>
+            Модель запроса на редактирование жанра.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Genres.UpdateGenresRequest.Id">
+            <summary>
+            id жанра
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Genres.UpdateGenresRequest.Name">
+            <summary>
+            Новое название жанра.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Offers.AddFeedbackReponse">
+            <summary>
+            Модель ответа добавления отзыва.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Offers.AddFeedbackReponse.Id">
+            <summary>
+            id созданного отзыва.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Offers.AddFeedbackRequest">
+            <summary>
+            Модель запроса на добавление отзыва.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Offers.AddFeedbackRequest.Estimation">
+            <summary>
+            Оценка книги от 1 до 5.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Offers.AddFeedbackRequest.Feedback">
+            <summary>
+            Текстовый отзыв пользователя на книгу.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Offers.GetFeedbacksResponse">
+            <summary>
+            Модель ответа получения отзывов.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Offers.GetFeedbacksResponse.UserFeedback">
+            <summary>
+            Отзыв пользователя (если есть).
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Offers.GetFeedbacksResponse.Feedbacks">
+            <summary>
+            Отзыв других пользователей.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Offers.GetOfferResponse">
+            <summary>
+            Модель ответа получения оффера.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Offers.GetOfferResponse.Offer">
+            <summary>
+            Информация об оффере.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Offers.GetOffersResponse">
+            <summary>
+            Модель ответа получения офферов.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Offers.GetOffersResponse.Offers">
+            <summary>
+            Информация об офферах.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.Offers.GetOffersSelectionsResponse">
+            <summary>
+            Модель ответа получения книжных подборок.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.Offers.GetOffersSelectionsResponse.Selections">
+            <summary>
+            Подборки книг.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.OffersCollector.ApproveOfferRequest">
+            <summary>
+            Модель запроса подтверждения оффера.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.OffersCollector.ApproveOfferRequest.OfferId">
+            <summary>
+            Id оффера.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.OffersCollector.ApproveOfferRequest.LinkedBookId">
+            <summary>
+            Привязанная к офферу книга.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.OffersCollector.ApproveOfferResponse">
+            <summary>
+            Модель ответа подтверждения оффера.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.OffersCollector.CreateOfferRequest">
+            <summary>
+            Модель запроса на создание оффера.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.OffersCollector.CreateOfferRequest.Title">
+            <summary>
+            Название книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.OffersCollector.CreateOfferRequest.Description">
+            <summary>
+            Описание оффера.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.OffersCollector.CreateOfferRequest.Authors">
+            <summary>
+            Авторы книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.OffersCollector.CreateOfferRequest.Price">
+            <summary>
+            Цена.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.OffersCollector.CreateOfferRequest.City">
+            <summary>
+            Город, в котором выкладывается объявление.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.OffersCollector.CreateOfferRequest.Image">
+            <summary>
+            Фотография книги.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.OffersCollector.CreateOfferResponse">
+            <summary>
+            Модель ответа создания оффера.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.OffersCollector.CreateOfferResponse.Id">
+            <summary>
+            Id jффера.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.OffersCollector.GetOffersCollectorResponse">
+            <summary>
+            Модель ответа получения офферов, находящихся на модерации.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.OffersCollector.GetOffersCollectorResponse.Offers">
+            <summary>
+            Информация об офферах.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.OffersCollector.RejectOfferRequest">
+            <summary>
+            Модель запроса на отклонение оффера.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.OffersCollector.RejectOfferRequest.Id">
+            <summary>
+            Id оффера.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.OffersCollector.RejectOfferRequest.RejectReason">
+            <summary>
+            Причина отказа.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.OffersCollector.RejectOfferResponse">
+            <summary>
+            Модель ответа на отклонение оффера.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.OffersCollector.RejectOfferResponse.Id">
+            <summary>
+            Id оффера
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.User.RegisterUserRequest">
+            <summary>
+            Модель запроса на регистрацию пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.User.RegisterUserRequest.Email">
+            <summary>
+            email пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.User.RegisterUserRequest.Name">
+            <summary>
+            Имя пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.User.RegisterUserRequest.Password">
+            <summary>
+            Пароль пользователя.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.User.SetNewAdminRequest">
+            <summary>
+            Модель запроса на добавление администратора.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.User.SetNewAdminRequest.Email">
+            <summary>
+            email пользователя.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.Specs.User.VerifyUserRequest">
+            <summary>
+            Модель запроса на верификацию пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.User.VerifyUserRequest.Email">
+            <summary>
+            Почта пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Controllers.Specs.User.VerifyUserRequest.Code">
+            <summary>
+            Код подтверждения.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Controllers.UserController">
+            <summary>
+            Контроллер пользователей.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Controllers.UserController.AuthorizeUser(BooksExchanger.Models.Requests.AuthRequest)">
+            <summary>
+            Выдает токен авторизации.
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="404">Неправильная почта или пароль.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.UserController.RegisterUser(BooksExchanger.Controllers.Specs.User.RegisterUserRequest)">
+            <summary>
+            Осуществляет отправку кода подтверждения.
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="409">Пользователь с такой почтой уже зарегистрирован.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.UserController.VerifyrUser(BooksExchanger.Controllers.Specs.User.VerifyUserRequest)">
+            <summary>
+            Осуществляет подтверждение почты пользователя и регистрирует его.
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="403">Неверный код подтверждения.</response>
+            <response code="404">Пользователь не запрашивал код на почту или прошло силком много времени.</response>
+            <response code="409">Пользователь с такой почтой уже зарегистрирован.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.UserController.SetAdmin(BooksExchanger.Controllers.Specs.User.SetNewAdminRequest)">
+            <summary>
+            Позволяет назначить пользователя админом.
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+            <response code="200">Успешное выполнение.</response>
+            <response code="400">Неверный формат запроса.</response>
+            <response code="401">Пользователь не авторизован.</response>
+            <response code="403">Пользователь не является админом.</response>
+            <response code="404">Пользователь с такой почтой не существует.</response>
+            <response code="409">Пользователь уже является админом.</response>
+        </member>
+        <member name="M:BooksExchanger.Middlewares.JwtMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions{BooksExchanger.Settings.AppSettings})">
+            <summary>
+            Конструктор мидлвари авторизации.
+            </summary>
+            <param name="next"></param>
+            <param name="appSettings"></param>
+        </member>
+        <member name="M:BooksExchanger.Middlewares.JwtMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Добавляет информацию о пользователе в контекст запроса.
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:BooksExchanger.Models.Requests.AddGenreRequest">
+            <summary>
+            Модель запроса создания жанра.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Requests.AddGenreRequest.Name">
+            <summary>
+            Название жанра.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Models.Requests.AuthRequest">
+            <summary>
+            Модель запроса на авторизацию пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Requests.AuthRequest.Email">
+            <summary>
+            email пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Requests.AuthRequest.Password">
+            <summary>
+            Пароль пользователя.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Models.Requests.AuthResponse">
+            <summary>
+            Модель ответа на авторизацию пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Requests.AuthResponse.Token">
+            <summary>
+            Токен авторизации.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Models.ResponseMapper">
+            <summary>
+            Класс-маппер моделей.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Models.ResponseMapper.MapAuthor(BooksExchanger.Models.Author)">
+            <summary>
+            Маппит модели автора.
+            </summary>
+            <param name="author"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Models.ResponseMapper.MapAuthor(BooksExchanger.Entities.Author)">
+            <summary>
+            Маппит модели автора.
+            </summary>
+            <param name="author"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Models.ResponseMapper.MapModerationStatus(BooksExchanger.Models.ModerationStatus)">
+            <summary>
+            Маппит модели статуса модерации.
+            </summary>
+            <param name="status"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Models.ResponseMapper.MapModerationStatus(BooksExchanger.Entities.ModerationStatus)">
+            <summary>
+            Маппит модели статуса модерации.
+            </summary>
+            <param name="status"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Models.ResponseMapper.MapModerationStatusToDb(BooksExchanger.Models.ModerationStatus)">
+            <summary>
+            Маппит модели статуса модерации.
+            </summary>
+            <param name="status"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Models.ResponseMapper.MapOfferCollector(BooksExchanger.Models.OfferCollector)">
+            <summary>
+            Маппит модели офферов на модерации.
+            </summary>
+            <param name="offerCollector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Models.ResponseMapper.MapOfferCollector(BooksExchanger.Entities.OffersCollector)">
+            <summary>
+            Маппит модели офферов на модерации.
+            </summary>
+            <param name="offersCollector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Models.ResponseMapper.MapChatWithMessages(BooksExchanger.Entities.Chat,System.Int64)">
+            <summary>
+            Маппит модели чатов.
+            </summary>
+            <param name="chat"></param>
+            <param name="currentUserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Models.ResponseMapper.MapMessage(BooksExchanger.Models.Message,System.Int64)">
+            <summary>
+            Маппит модели сообщений.
+            </summary>
+            <param name="message"></param>
+            <param name="currentUserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Models.ResponseMapper.MapMessage(BooksExchanger.Entities.Message)">
+            <summary>
+            Маппит модели сообщений.
+            </summary>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Models.ResponseMapper.MapChat(BooksExchanger.Models.Chat)">
+            <summary>
+            Маппит модели чатов.
+            </summary>
+            <param name="chat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Models.ResponseMapper.MapChat(BooksExchanger.Entities.Chat,System.Int64)">
+            <summary>
+            Маппит модели чатов.
+            </summary>
+            <param name="chat"></param>
+            <param name="currentUserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Models.ResponseMapper.MapGenre(BooksExchanger.Models.Genre)">
+            <summary>
+            Маппит модели жанров.
+            </summary>
+            <param name="genre"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Models.ResponseMapper.MapGenre(BooksExchanger.Entities.Genre)">
+            <summary>
+            Маппит модели жанров.
+            </summary>
+            <param name="genre"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Models.ResponseMapper.MapOwner(BooksExchanger.Models.Owner)">
+            <summary>
+            Маппит модели владельца.
+            </summary>
+            <param name="owner"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Models.ResponseMapper.MapOwner(BooksExchanger.Entities.User)">
+            <summary>
+            Маппит модели владельца.
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Models.ResponseMapper.MapOffer(BooksExchanger.Models.Offer)">
+            <summary>
+            Маппит модели офферов.
+            </summary>
+            <param name="offer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Models.ResponseMapper.MapOffer(BooksExchanger.Models.Offer,System.Boolean)">
+            <summary>
+            Маппит модели офферов.
+            </summary>
+            <param name="offer"></param>
+            <param name="isFavorite"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Models.ResponseMapper.MapOffer(BooksExchanger.Entities.Offer)">
+            <summary>
+            Маппит модели офферов.
+            </summary>
+            <param name="offer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Models.ResponseMapper.MapBook(BooksExchanger.Models.Book)">
+            <summary>
+            Маппит модели книг.
+            </summary>
+            <param name="book"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Models.ResponseMapper.MapBook(BooksExchanger.Entities.Book)">
+            <summary>
+            Маппит модели книг.
+            </summary>
+            <param name="book"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Models.ResponseMapper.MapSelection(BooksExchanger.Models.Selection)">
+            <summary>
+            Маппит модели подборок.
+            </summary>
+            <param name="selection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Models.ResponseMapper.MapFeedback(BooksExchanger.Models.Feedback)">
+            <summary>
+            Маппит модели отзывов.
+            </summary>
+            <param name="feedback"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Models.ResponseMapper.MapFeedback(BooksExchanger.Entities.Feedback,BooksExchanger.Models.BookEstimation)">
+            <summary>
+            Маппит модели отзывов.
+            </summary>
+            <param name="feedback"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Models.ResponseMapper.MapUser(BooksExchanger.Entities.User)">
+            <summary>
+            Маппит модели юзеров.
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BooksExchanger.Models.Author">
+            <summary>
+            Модель автора.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Author.Id">
+            <summary>
+            id автора.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Author.Name">
+            <summary>
+            ФИО автора.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Models.AuthUser">
+            <summary>
+            Модель авторизированного пользорвателя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.AuthUser.Id">
+            <summary>
+            Id пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.AuthUser.Role">
+            <summary>
+            Роль пользователя.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Models.Book">
+            <summary>
+            Модель книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Book.Id">
+            <summary>
+            id книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Book.Title">
+            <summary>
+            Название книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Book.Genre">
+            <summary>
+            Жанр книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Book.Authors">
+            <summary>
+            Информаиця об авторах книги.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Models.BookEstimation">
+            <summary>
+            Модель рейтинга книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.BookEstimation.CountRating">
+            <summary>
+            Количество оценок.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.BookEstimation.SumRating">
+            <summary>
+            Сумма оценок.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Models.Chat">
+            <summary>
+            Модель чата.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Chat.Id">
+            <summary>
+            Id чата.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Chat.UserName">
+            <summary>
+            Имя собеседника.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Chat.LastMessage">
+            <summary>
+            Последнее отправленное сообщение.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Chat.UserId">
+            <summary>
+            id собеседника.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Models.ChatWithMessages">
+            <summary>
+            Модель чата с сообщениями.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.ChatWithMessages.Id">
+            <summary>
+            Id чата.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.ChatWithMessages.UserName">
+            <summary>
+            Имя собеседника.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.ChatWithMessages.UserId">
+            <summary>
+            id собеседника.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.ChatWithMessages.Messages">
+            <summary>
+            Сообщения.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Models.Constants">
+            <summary>
+            Класс, содержащий константы.
+            </summary>
+        </member>
+        <member name="F:BooksExchanger.Models.Constants.BooksGenreFK">
+            <summary>
+            Внешний ключ книги к жанру.
+            </summary>
+        </member>
+        <member name="F:BooksExchanger.Models.Constants.AuthorsBooksAuthorIdFK">
+            <summary>
+            Внешний ключ книги к авторам.
+            </summary>
+        </member>
+        <member name="F:BooksExchanger.Models.Constants.OffersUsersPK">
+            <summary>
+            Внешний ключ оффера к пользователю.
+            </summary>
+        </member>
+        <member name="F:BooksExchanger.Models.Constants.GenresNameKey">
+            <summary>
+            Уникальное имя в жанрах.
+            </summary>
+        </member>
+        <member name="F:BooksExchanger.Models.Constants.FeedbacksBookIdFK">
+            <summary>
+            Внешний ключ отзыва к книге.
+            </summary>
+        </member>
+        <member name="F:BooksExchanger.Models.Constants.OffersBookIdFK">
+            <summary>
+            Внешний ключ оффера к книге.
+            </summary>
+        </member>
+        <member name="F:BooksExchanger.Models.Constants.MaxOffersInSelection">
+            <summary>
+            Максимальное количество офферов в подборке.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Models.Feedback">
+            <summary>
+            Модель отзыва.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Feedback.Id">
+            <summary>
+            Id отзыва.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Feedback.Text">
+            <summary>
+            Текст отзыва.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Feedback.GivenByUserId">
+            <summary>
+            Id автора отзыва.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Feedback.Estimation">
+            <summary>
+            Оценка книги пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Feedback.UserName">
+            <summary>
+            Имя автора.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Feedback.BookEstimation">
+            <summary>
+            Оценка книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Feedback.CreatedAt">
+            <summary>
+            Дата и время создания отзыва.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Models.Genre">
+            <summary>
+            Модель жанра.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Genre.Id">
+            <summary>
+            id жанра.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Genre.Name">
+            <summary>
+            Наименование жанра.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Models.Message">
+            <summary>
+            Модель сообщения.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Message.Id">
+            <summary>
+            Id 
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Message.Text">
+            <summary>
+            Текс сообщения.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Message.UserId">
+            <summary>
+            Id автора сообщения
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Message.SentAt">
+            <summary>
+            Дата и время отправки сообщения
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Models.ModerationStatus">
+            <summary>
+            Статус модерации.
+            </summary>
+        </member>
+        <member name="F:BooksExchanger.Models.ModerationStatus.Submitted">
+            <summary>
+            Отправлен.
+            </summary>
+        </member>
+        <member name="F:BooksExchanger.Models.ModerationStatus.Consideration">
+            <summary>
+            На рассмотрении.
+            </summary>
+        </member>
+        <member name="F:BooksExchanger.Models.ModerationStatus.Approved">
+            <summary>
+            Подтвержден.
+            </summary>
+        </member>
+        <member name="F:BooksExchanger.Models.ModerationStatus.Rejected">
+            <summary>
+            Отклонен.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Models.Offer">
+            <summary>
+            Модель оффера.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Offer.Id">
+            <summary>
+            id оффера.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Offer.Title">
+            <summary>
+            Название книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Offer.Description">
+            <summary>
+            Описание оффера.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Offer.Price">
+            <summary>
+            Цена.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Offer.City">
+            <summary>
+            Город.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Offer.Picture">
+            <summary>
+            Загрузочная ссылка на картинку.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Offer.Genre">
+            <summary>
+            Информация о жанре.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Offer.Authors">
+            <summary>
+            Список авторов.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Offer.Owner">
+            <summary>
+            Информация о владельце.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Offer.CreatedAt">
+            <summary>
+            Дата и время создания.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Offer.BookRating">
+            <summary>
+            Рейтинг книги.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Models.OfferCollector">
+            <summary>
+            Модель оффера на модерации.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.OfferCollector.Id">
+            <summary>
+            Id оффера.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.OfferCollector.Title">
+            <summary>
+            Название книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.OfferCollector.Description">
+            <summary>
+            Описание оффера.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.OfferCollector.Owner">
+            <summary>
+            Информация о владельце.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.OfferCollector.Authors">
+            <summary>
+            Информация об авторах.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.OfferCollector.Price">
+            <summary>
+            Цена.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.OfferCollector.ModerationStatus">
+            <summary>
+            Статус модерации
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.OfferCollector.City">
+            <summary>
+            Город публикации.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.OfferCollector.Picture">
+            <summary>
+            Ссылка на картинку.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.OfferCollector.CreatedAt">
+            <summary>
+            Дата и время создания.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.OfferCollector.RegectReason">
+            <summary>
+            Причина отказа (при наличии).
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Models.Owner">
+            <summary>
+            Модель автора.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Owner.Id">
+            <summary>
+            id пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Owner.Name">
+            <summary>
+            Имя пользователя.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Models.RecieveMessage">
+            <summary>
+            Модель сообщения для получения.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.RecieveMessage.ChatId">
+            <summary>
+            Id чата.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.RecieveMessage.MessageId">
+            <summary>
+            Id сообщения.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.RecieveMessage.Text">
+            <summary>
+            Текст сообщения.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.RecieveMessage.Time">
+            <summary>
+            Дата и время сообщения.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Models.Selection">
+            <summary>
+            Модель книжной подборки.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Selection.Title">
+            <summary>
+            Название подборки.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.Selection.Offers">
+            <summary>
+            Офферы.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Models.SendMessage">
+            <summary>
+            Модель сообщения для отправки.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.SendMessage.ToUserId">
+            <summary>
+            Id получателя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.SendMessage.Text">
+            <summary>
+            Текс сообщения.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Models.ShortUserInfo">
+            <summary>
+            Краткая информация о пользователе.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.ShortUserInfo.Email">
+            <summary>
+            email пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.ShortUserInfo.Password">
+            <summary>
+            Пароль пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.ShortUserInfo.Name">
+            <summary>
+            Имя пользователя.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Models.User">
+            <summary>
+            Модель пользовтаеля.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.User.Id">
+            <summary>
+            id пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.User.Email">
+            <summary>
+            email пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.User.Password">
+            <summary>
+            Пароль пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.User.Name">
+            <summary>
+            Имя пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Models.User.Role">
+            <summary>
+            Роль пользоватля.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Models.UserRole">
+            <summary>
+            Модель ролей пользователя.
+            </summary>
+        </member>
+        <member name="F:BooksExchanger.Models.UserRole.User">
+            <summary>
+            Обычный пользователь.
+            </summary>
+        </member>
+        <member name="F:BooksExchanger.Models.UserRole.Admin">
+            <summary>
+            Администратор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Exeptions.AuthorNotFoundException">
+            <summary>
+            Автор не найден.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.AuthorNotFoundException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.AuthorNotFoundException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.AuthorNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Exeptions.BookNotFoundException">
+            <summary>
+            Книга не найдена.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.BookNotFoundException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.BookNotFoundException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.BookNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Exeptions.GenreNotFoundException">
+            <summary>
+            Жанр не найден.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.GenreNotFoundException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.GenreNotFoundException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.GenreNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Exeptions.OfferAlreadyApprovedException">
+            <summary>
+            Оффер уже подтвержден.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.OfferAlreadyApprovedException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.OfferAlreadyApprovedException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.OfferAlreadyApprovedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Exeptions.OfferAlreadyFavoriteException">
+            <summary>
+            Оффер уже находистя в избранном.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.OfferAlreadyFavoriteException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.OfferAlreadyFavoriteException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.OfferAlreadyFavoriteException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Exeptions.OfferAlreadyNotInFavoritesException">
+            <summary>
+            Оффер не находистя в избранном пользвоателя.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.OfferAlreadyNotInFavoritesException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.OfferAlreadyNotInFavoritesException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.OfferAlreadyNotInFavoritesException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Exeptions.OfferNotFoundException">
+            <summary>
+            Оффер не найден.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.OfferNotFoundException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.OfferNotFoundException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.OfferNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Exeptions.RemoveAuthorNotAllowedException">
+            <summary>
+            Нельзя удалить автора.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.RemoveAuthorNotAllowedException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.RemoveAuthorNotAllowedException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.RemoveAuthorNotAllowedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Exeptions.RemoveGenreNotAllowedException">
+            <summary>
+            Нельзя удалить жанр.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.RemoveGenreNotAllowedException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.RemoveGenreNotAllowedException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.RemoveGenreNotAllowedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Exeptions.UserAlreadyExistException">
+            <summary>
+            Пользователь уже существует.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.UserAlreadyExistException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.UserAlreadyExistException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.UserAlreadyExistException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Exeptions.UserNotFoundException">
+            <summary>
+            Пользователь не найден.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.UserNotFoundException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.UserNotFoundException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.UserNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Implementations.AuthorRepository">
+            <summary>
+            Хранилице авторов.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.AuthorRepository.InsertAuthor(System.String)">
+            <summary>
+            Добавление автора.
+            </summary>
+            <param name="name">Имя автора.</param>
+            <returns>id атора.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.AuthorRepository.UpdateAuthor(System.Int64,System.String)">
+            <summary>
+            Обновляет автора по id.
+            </summary>
+            <param name="id">id автора.</param>
+            <param name="name">Имя автора.</param>
+            <returns>id автора.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.AuthorRepository.GetAuthors">
+            <summary>
+            Получение авторов.
+            </summary>
+            <returns>Авторы.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.AuthorRepository.GetAuthors(System.Func{System.String,System.Boolean})">
+            <summary>
+            Получение авторов с фильтрами.
+            </summary>
+            <param name="filter">Фильтры.</param>
+            <returns>Авторы.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.AuthorRepository.RemoveAuthor(System.Int64)">
+            <summary>
+            Удаление автора по id.
+            </summary>
+            <param name="id">id автора.</param>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Implementations.BookRepository">
+            <summary>
+            Хранилище книг.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.BookRepository.InsertBook(System.String,System.Int32,System.Collections.Generic.List{System.Int64})">
+            <summary>
+            Добавляет новую книгу.
+            </summary>
+            <param name="title">Название книги.</param>
+            <param name="genreId">Жанр.</param>
+            <param name="authorIds">Авторы.</param>
+            <returns>id книги.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.BookRepository.UpdateBook(System.Int64,System.String,System.Int32,System.Collections.Generic.List{System.Int64})">
+            <summary>
+            Обновляет книгу.
+            </summary>
+            <param name="bookId">Книга.</param>
+            <param name="title">Заголовок.</param>
+            <param name="genreId">Жанр.</param>
+            <param name="authorIds">Авторы.</param>
+            <returns>id книги.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.BookRepository.GetBooks(System.Func{System.Int64,System.Boolean})">
+            <summary>
+            Получение книг.
+            </summary>
+            <param name="filter">Фильтр.</param>
+            <returns>Книги.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.BookRepository.GetBooks(System.Func{System.String,System.Boolean})">
+            <summary>
+            Получение книг.
+            </summary>
+            <param name="filter">Фильтр.</param>
+            <returns>Книги.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.BookRepository.RemoveBook(System.Int64)">
+            <summary>
+            Удаление книги по id.
+            </summary>
+            <param name="bookId">Книга.</param>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Implementations.ChatRepository">
+            <summary>
+            Хранилище чатов.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.ChatRepository.GetChats(System.Int64,System.Boolean)">
+            <summary>
+            Получение чатов.
+            </summary>
+            <param name="userId">Юзер.</param>
+            <param name="needOrderMessagesByDescending">Нужно ли сортировать сообщения.</param>
+            <returns>Чаты.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.ChatRepository.AddMessage(System.Int64,System.Int64,System.String)">
+            <summary>
+            Добавляет сообщение.
+            </summary>
+            <param name="senderId">Отправитель.</param>
+            <param name="chatId">Чат.</param>
+            <param name="text">Сообщение.</param>
+            <returns>id сообщения.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.ChatRepository.GetChatWithMessages(System.Int64,System.Int64,System.Boolean)">
+            <summary>
+            Получение чата с сообщениями.
+            </summary>
+            <param name="currentUserId">Текущий пользователь.</param>
+            <param name="secondUserId">Собеседник.</param>
+            <param name="needOrderMessagesByDescending">Нужно ли сортировать сообщения.</param>
+            <returns>Чат с ссобщениями.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.ChatRepository.CreateChatWithMessages(System.Int64,System.Int64)">
+            <summary>
+            Создать чат с сообщениями.
+            </summary>
+            <param name="currentUserId">Текущий пользователь.</param>
+            <param name="secondUserId">Собеседник.</param>
+            <returns>Чат с сообщениями.</returns>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Implementations.FeedbackRepository">
+            <summary>
+            Хранилище отзывов.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.FeedbackRepository.UpdateFeedback(System.Int64,System.Guid,System.String,System.Nullable{System.Int32},BooksExchanger.Models.BookEstimation)">
+            <summary>
+            Добавляет или обновляет отзыв.
+            </summary>
+            <param name="authorId"></param>
+            <param name="offerId"></param>
+            <param name="text"></param>
+            <param name="estimation"></param>
+            <param name="bookEstimation"></param>
+            <returns></returns>
+            <exception cref="T:BooksExchanger.Repositories.Exeptions.OfferNotFoundException"></exception>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.FeedbackRepository.InsertFeedback(System.Int64,System.Guid,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Добавляет новый отзыв.
+            </summary>
+            <param name="authorId">Автор отзыва.</param>
+            <param name="offerId">id оффера.</param>
+            <param name="text">Текст отзыва.</param>
+            <param name="estimation">Оценка книги.</param>
+            <returns></returns>
+        </member>
+        <member name="T:BooksExchanger.Context.DbCtx">
+            <summary>
+            Контекст БД.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Context.DbCtx.#cctor">
+            <summary>
+            Статический конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Context.DbCtx.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Context.DbCtx.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{BooksExchanger.Context.DbCtx})">
+            <summary>
+            Конструктор.
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="P:BooksExchanger.Context.DbCtx.Authors">
+            <summary>
+            Авторы.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Context.DbCtx.Books">
+            <summary>
+            Книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Context.DbCtx.Chats">
+            <summary>
+            Чаты.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Context.DbCtx.Feedbacks">
+            <summary>
+            Отзывы.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Context.DbCtx.Genres">
+            <summary>
+            Жанры.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Context.DbCtx.Messages">
+            <summary>
+            Сообщения.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Context.DbCtx.Offers">
+            <summary>
+            Офферы.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Context.DbCtx.OffersCollectors">
+            <summary>
+            Офферы на модрации.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Context.DbCtx.Users">
+            <summary>
+            Пользователи.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Entities.Author">
+            <summary>
+            Класс автора в БД.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Author.Id">
+            <summary>
+            Id автора.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Author.Name">
+            <summary>
+            Имя пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Author.Books">
+            <summary>
+            Связанные книги.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Entities.Book">
+            <summary>
+            Объект книги в БД.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Book.Id">
+            <summary>
+            id книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Book.Title">
+            <summary>
+            Заголовок книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Book.GenreId">
+            <summary>
+            id жанра
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Book.SumRating">
+            <summary>
+            Сумма оценок иниги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Book.CountRating">
+            <summary>
+            Количество оценок книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Book.CreatedAt">
+            <summary>
+            Дата и время создания книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Book.DeletedAt">
+            <summary>
+            Дата и время удаления книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Book.Feedbacks">
+            <summary>
+            Отзывы на книгу.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Book.Genre">
+            <summary>
+            Информация о жанре.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Book.Offers">
+            <summary>
+            Связанные с книгой офферы.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Book.Authors">
+            <summary>
+            Связанные с книгой авторы.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Entities.Chat">
+            <summary>
+            Объект чата в БД.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Chat.ChatId">
+            <summary>
+            id чата.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Chat.User1Id">
+            <summary>
+            id первого юзера.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Chat.User2Id">
+            <summary>
+            id второго юзера.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Chat.CreatedAt">
+            <summary>
+            Дата и время создания чата.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Chat.Messages">
+            <summary>
+            Связанные с чатом сообщения.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Chat.User1">
+            <summary>
+            Информация о первом пользователе.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Chat.User2">
+            <summary>
+            Информация о втором пользователе.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Entities.Feedback">
+            <summary>
+            Объект отзыва 
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Feedback.Id">
+            <summary>
+            id отзыва.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Feedback.BookId">
+            <summary>
+            id книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Feedback.Feedback1">
+            <summary>
+            Содержание отзыва.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Feedback.GivenByUserId">
+            <summary>
+            id автора отзыва.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Feedback.Estimation">
+            <summary>
+            Оценка.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Feedback.CreatedAt">
+            <summary>
+            Дата и время создания.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Feedback.DeletedAt">
+            <summary>
+            Дата и время удаления.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Feedback.Book">
+            <summary>
+            Связанная книга.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Feedback.GivenByUser">
+            <summary>
+            Информация лб авторе отзыва.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Entities.Genre">
+            <summary>
+            Объект жанра в БД.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Genre.Id">
+            <summary>
+            id жанра.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Genre.Name">
+            <summary>
+            Название жанра.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Genre.Books">
+            <summary>
+            Связанные книги.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Entities.Message">
+            <summary>
+            Объект сообщения в БД.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Message.MessageId">
+            <summary>
+            id сообщения.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Message.ChatId">
+            <summary>
+            id чата.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Message.UserId">
+            <summary>
+            id пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Message.Text">
+            <summary>
+            Текст сообщения.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Message.SentAt">
+            <summary>
+            Дата и время отправки.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Message.Chat">
+            <summary>
+            Связанный чат.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Message.User">
+            <summary>
+            Информация о пользователе.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Entities.ModerationStatus">
+            <summary>
+            Структура статуса модерации.
+            </summary>
+        </member>
+        <member name="F:BooksExchanger.Entities.ModerationStatus.Submitted">
+            <summary>
+            Отправлен.
+            </summary>
+        </member>
+        <member name="F:BooksExchanger.Entities.ModerationStatus.Consideration">
+            <summary>
+            На рассмотрении.
+            </summary>
+        </member>
+        <member name="F:BooksExchanger.Entities.ModerationStatus.Approved">
+            <summary>
+            Подтвержден.
+            </summary>
+        </member>
+        <member name="F:BooksExchanger.Entities.ModerationStatus.Rejected">
+            <summary>
+            Отклонен.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Entities.Offer">
+            <summary>
+            Объект оффера в БД.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Offer.Id">
+            <summary>
+            id оффера.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Offer.BookId">
+            <summary>
+            id книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Offer.OwnerId">
+            <summary>
+            id владельца.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Offer.Description">
+            <summary>
+            Описание.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Offer.Price">
+            <summary>
+            Цена.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Offer.City">
+            <summary>
+            Город размещения оффера.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Offer.Picture">
+            <summary>
+            Ссылка на картинку.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Offer.CreatedAt">
+            <summary>
+            Дата и время создания.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Offer.DeletedAt">
+            <summary>
+            Дата и время удаления.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Offer.Book">
+            <summary>
+            Связанная книга.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Offer.Owner">
+            <summary>
+            Информация о владльце.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.Offer.Users">
+            <summary>
+            Пользователи, у которых оффер в избранном.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Entities.OffersCollector">
+            <summary>
+            Объект оффера до модерации в БД.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.OffersCollector.Id">
+            <summary>
+            id оффера.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.OffersCollector.OwnerId">
+            <summary>
+            id владельца.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.OffersCollector.Title">
+            <summary>
+            Заголовок.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.OffersCollector.Authors">
+            <summary>
+            Авторы книги.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.OffersCollector.Description">
+            <summary>
+            Описание.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.OffersCollector.Price">
+            <summary>
+            Цена.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.OffersCollector.ModerationStatus">
+            <summary>
+            Статус модерации.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.OffersCollector.City">
+            <summary>
+            Город размещения.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.OffersCollector.RejectReason">
+            <summary>
+            Прицина отказа.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.OffersCollector.Picture">
+            <summary>
+            Ссылка на картинку.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.OffersCollector.CreatedAt">
+            <summary>
+            Дата и время создания.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.OffersCollector.DeletedAt">
+            <summary>
+            Дата и время удаления.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.OffersCollector.Owner">
+            <summary>
+            Информация о владельце.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Entities.User">
+            <summary>
+            Объект пользователя в БД.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.User.Id">
+            <summary>
+            id пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.User.Name">
+            <summary>
+            Имя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.User.Email">
+            <summary>
+            Почта.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.User.Password">
+            <summary>
+            Пароль.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.User.Role">
+            <summary>
+            Роль.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.User.ChatUser1s">
+            <summary>
+            Чаты пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.User.ChatUser2s">
+            <summary>
+            Чаты пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.User.Feedbacks">
+            <summary>
+            Отзывы пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.User.Messages">
+            <summary>
+            Сообщения пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.User.Offers">
+            <summary>
+            Офферы пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.User.OffersCollectors">
+            <summary>
+            Офферы пользователя на модерации.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.Entities.User.OffersNavigation">
+            <summary>
+            Избранные офферы пользователя.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Entities.UserRole">
+            <summary>
+            Объект роли пользователя в БД.
+            </summary>
+        </member>
+        <member name="F:BooksExchanger.Entities.UserRole.User">
+            <summary>
+            Роль пользователя.
+            </summary>
+        </member>
+        <member name="F:BooksExchanger.Entities.UserRole.Admin">
+            <summary>
+            Роль админа.
+            </summary>
+        </member>
+    </members>
+</doc>
