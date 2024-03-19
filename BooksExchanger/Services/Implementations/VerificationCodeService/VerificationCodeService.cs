@@ -4,9 +4,10 @@ using System.Collections.Concurrent;
 using BooksExchanger.Models;
 using BooksExchanger.Services.Implementations.UserService.Exceptions;
 using BooksExchanger.Services.Interfaces;
+using Obshajka.VerificationCodesManager;
 using Obshajka.VerificationCodesManager.Exceptions;
 
-namespace Obshajka.VerificationCodesManager
+namespace BooksExchanger.VerificationCodesManager
 {
     public class VerificationCodeService : IVerificationCodeService
     {
@@ -55,7 +56,7 @@ namespace Obshajka.VerificationCodesManager
             string verificationCode = s_getVerificationCode.Next(1000, 10000).ToString();
             
 
-            using (MailMessage mailMessage = new MailMessage("akkforfox5@gmail.com", "aisharipov@edu.hse.ru")) // TODO: move to settings
+            using (MailMessage mailMessage = new MailMessage("akkforfox5@gmail.com", userInfo.Email)) // TODO: move to settings
             {
                 mailMessage.Subject = _emailHeader;
                 mailMessage.Body = _messageBody + verificationCode;

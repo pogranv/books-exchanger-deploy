@@ -111,8 +111,8 @@ public class GenresController : ControllerBase
     [HttpGet]
     public IActionResult GetGenres()
     {
-        var authors = _genreService.GetGenres().ToList();
-        var responseGenres = authors.ConvertAll(_responseMapper.MapGenre);
+        var genres = _genreService.GetGenres().ToList();
+        var responseGenres = genres.ConvertAll(_responseMapper.MapGenre);
         return Ok(new GetGenresResponse { Genres = responseGenres });
     }
     

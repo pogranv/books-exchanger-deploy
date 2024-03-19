@@ -190,19 +190,4 @@ public class FeedbackRepository : IFeedbackRepository
             SumRating = book.SumRating.Value
         };
     }
-
-    // private Models.Feedback BuildFeedback(Feedback feedback, Book book)
-    // {
-    //     // _responseMapper.MapFeedback(feedback);
-    //     return new Models.Feedback
-    //     {
-    //         Id = feedback.Id,
-    //         CreatedAt = feedback.CreatedAt,
-    //         Estimation = feedback.Estimation,
-    //         GivenByUserId = feedback.GivenByUserId,
-    //         BookEstimation = BuildBookEstimation(book),
-    //         UserName = feedback.GivenByUser.Name,
-    //         Text = feedback.Feedback1,
-    //     };
-    // }
 }

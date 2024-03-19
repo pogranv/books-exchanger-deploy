@@ -12,6 +12,7 @@ using BooksExchanger.Services.Implementations;
 using BooksExchanger.Services.Implementations.UserService.Exceptions;
 using BooksExchanger.Services.Interfaces;
 using BooksExchanger.Settings;
+using BooksExchanger.VerificationCodesManager;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -35,7 +36,7 @@ public class UserController : ControllerBase
 
     static UserController()
     {
-        var emailParams = new EmailParams("Header", "Header", "message");
+        var emailParams = new EmailParams("Books Exhcanger", "Books Exhcanger", "Здравствуйте! Ваш код подтверждения для приложения Books Exhcanger: ");
         s_verificationCodeService = new VerificationCodeService(5, emailParams);
     }
 

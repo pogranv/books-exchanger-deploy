@@ -30,6 +30,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("MyCorsPolicy", builder =>
+        builder.WithOrigins("*")  // Замените "http://example.com" адресом вашего фронтенд приложения
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
+});
 #region Swagger Configuration
 builder.Services.AddSwaggerGen(swagger =>
 {
@@ -129,6 +138,8 @@ builder.Services.AddScoped<IChatRepository, ChatRepository>();
 // builder.Services.AddSingleton<IVerificationCodesManager, VerificationCodesManager>();
 
 var app = builder.Build();
+app.UseCors("MyCorsPolicy");
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

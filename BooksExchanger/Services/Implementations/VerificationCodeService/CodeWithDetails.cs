@@ -1,32 +1,28 @@
-﻿
+﻿using BooksExchanger.Models;
 
-using BooksExchanger.Models;
-
-namespace Obshajka.VerificationCodesManager
+namespace BooksExchanger.VerificationCodesManager;
+internal class CodeWithDetails
 {
+    public ShortUserInfo User { get; }
+    public string VerificationCode { get; }
 
-    internal class CodeWithDetails
+    private readonly DateTime _timeOfCreation;
+    public CodeWithDetails(ShortUserInfo user, string verificationCode) 
     {
-        public ShortUserInfo User { get; }
-        public string VerificationCode { get; }
+        User = user;
+        VerificationCode = verificationCode;
+        _timeOfCreation = DateTime.Now;
+    }
 
-        private readonly DateTime _timeOfCreation;
-        public CodeWithDetails(ShortUserInfo user, string verificationCode) 
-        {
-            User = user;
-            VerificationCode = verificationCode;
-            _timeOfCreation = DateTime.Now;
-        }
+    public bool IsEqualsVerificationCode(string code)
+    {
+        return VerificationCode.Equals(code);
+    }
 
-        public bool IsEqualsVerificationCode(string code)
-        {
-            return VerificationCode.Equals(code);
-        }
-
-        public bool IsDurationOfExistsOverdue(int lifeTimeMinutes)
-        {
-            var now = DateTime.Now;
-            return lifeTimeMinutes < now.Subtract(_timeOfCreation).Minutes;
-        }
+    public bool IsDurationOfExistsOverdue(int lifeTimeMinutes)
+    {
+        var now = DateTime.Now;
+        return lifeTimeMinutes < now.Subtract(_timeOfCreation).Minutes;
     }
 }
+
