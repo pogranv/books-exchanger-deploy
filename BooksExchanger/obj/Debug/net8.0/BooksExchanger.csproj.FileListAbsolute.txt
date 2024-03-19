@@ -239,3 +239,6 @@
 /Users/pogranv/Desktop/kursach/BooksExchanger/Для докера/BooksExchanger/BooksExchanger/obj/Debug/net8.0/BooksExchanger.pdb
 /Users/pogranv/Desktop/kursach/BooksExchanger/Для докера/BooksExchanger/BooksExchanger/obj/Debug/net8.0/BooksExchanger.genruntimeconfig.cache
 /Users/pogranv/Desktop/kursach/BooksExchanger/Для докера/BooksExchanger/BooksExchanger/obj/Debug/net8.0/ref/BooksExchanger.dll
+/Users/pogranv/Desktop/kursach/BooksExchanger/Для докера/BooksExchanger/BooksExchanger/bin/Debug/net8.0/System.Web.Cors.dll
+/Users/pogranv/Desktop/kursach/BooksExchanger/Для докера/BooksExchanger/BooksExchanger/bin/Debug/net8.0/System.Web.Http.dll
+/Users/pogranv/Desktop/kursach/BooksExchanger/Для докера/BooksExchanger/BooksExchanger/bin/Debug/net8.0/System.Web.Http.Cors.dll
