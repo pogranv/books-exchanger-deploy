@@ -34,10 +34,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("MyCorsPolicy", builder =>
-        builder.WithOrigins("*") // Замените "http://example.com" адресом вашего фронтенд приложения
+        builder.WithOrigins("http://localhost:4200") // Замените "http://example.com" адресом вашего фронтенд приложения
             .AllowAnyMethod()
-            .AllowAnyHeader());
-    // .AllowCredentials());
+            .AllowAnyHeader()
+            .AllowCredentials());
 });
 #region Swagger Configuration
 builder.Services.AddSwaggerGen(swagger =>

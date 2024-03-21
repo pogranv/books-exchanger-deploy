@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BooksExchanger")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+279b9c4c3747c71fb715fcf95b9eeae1d4833b5b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a7328010a07249d837627720e3c20233d4648069")]
 [assembly: System.Reflection.AssemblyProductAttribute("BooksExchanger")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BooksExchanger")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
