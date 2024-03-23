@@ -168,10 +168,17 @@ public class UserController : ControllerBase
             }
             catch (UserNotFoundException ex)
             {
-                NotFound(new ErrorResponse { Message = ex.Message });
+                return NotFound(new ErrorResponse { Message = ex.Message });
             }
             
             return Ok();
         }
+    }
+    
+    [HttpGet("check")]
+    [Attributes.Auth.CheckAuthorize]
+    public IActionResult CheckToken()
+    {
+        return Ok();
     }
 }

@@ -15,6 +15,17 @@
             </summary>
             <param name="context"></param>
         </member>
+        <member name="T:BooksExchanger.Attributes.Auth.CheckAuthorizeAttribute">
+            <summary>
+            Атрибут авторизации с правами админа.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Attributes.Auth.CheckAuthorizeAttribute.OnAuthorization(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)">
+            <summary>
+            Проверка авторизации админа.
+            </summary>
+            <param name="context"></param>
+        </member>
         <member name="T:BooksExchanger.Attributes.Auth.UserAuthorizeAttribute">
             <summary>
             Атрибут авторизации пользователя.
