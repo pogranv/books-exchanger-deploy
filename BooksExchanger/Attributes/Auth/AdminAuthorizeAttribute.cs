@@ -1,7 +1,8 @@
-using BooksExchanger.Controllers.Specs;
-using BooksExchanger.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+
+using BooksExchanger.Controllers.Specs;
+using BooksExchanger.Models;
 
 namespace BooksExchanger.Attributes.Auth;
 

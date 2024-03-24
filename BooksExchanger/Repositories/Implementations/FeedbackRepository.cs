@@ -1,12 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+
 using BooksExchanger.Context;
-using BooksExchanger.Controllers.Specs;
-using BooksExchanger.Controllers.Specs.Offers;
-using BooksExchanger.Entities;
 using BooksExchanger.Models;
 using BooksExchanger.Repositories.Exeptions;
 using BooksExchanger.Repositories.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+
 using Book = BooksExchanger.Entities.Book;
 using Feedback = BooksExchanger.Entities.Feedback;
 
@@ -20,6 +18,9 @@ public class FeedbackRepository : IFeedbackRepository
 {
     private ResponseMapper _responseMapper;
 
+    /// <summary>
+    /// Конструктор хранилища отзывов.
+    /// </summary>
     public FeedbackRepository()
     {
         _responseMapper = new();
@@ -109,6 +110,12 @@ public class FeedbackRepository : IFeedbackRepository
         }
     }
 
+    /// <summary>
+    /// Получает отзыв.
+    /// </summary>
+    /// <param name="offerId">Идентификатор предложения.</param>
+    /// <param name="authorId">Идентификатор автора отзыва.</param>
+    /// <returns>Отзыв или null, если отзыв не найден.</returns>
     public Models.Feedback? GetFeedback(Guid offerId, long authorId)
     {
         using (DbCtx db = new DbCtx())
@@ -128,6 +135,11 @@ public class FeedbackRepository : IFeedbackRepository
         }
     }
 
+    /// <summary>
+    /// Получает отзыв по идентификатору.
+    /// </summary>
+    /// <param name="feedbackId">Идентификатор отзыва.</param>
+    /// <returns>Отзыв или null, если отзыв не найден.</returns>
     public Models.Feedback? GetFeedback(long feedbackId)
     {
         using (DbCtx db = new DbCtx())
@@ -141,6 +153,11 @@ public class FeedbackRepository : IFeedbackRepository
         }
     }
 
+    /// <summary>
+    /// Удаляет отзыв.
+    /// </summary>
+    /// <param name="feedbackId">Идентификатор отзыва.</param>
+    /// <returns>True, если отзыв успешно удалён, иначе False.</returns>
     public bool RemoveFeedback(long feedbackId)
     {
         using (DbCtx db = new DbCtx())
@@ -163,6 +180,11 @@ public class FeedbackRepository : IFeedbackRepository
         }
     }
 
+    /// <summary>
+    /// Получает отзывы оффера.
+    /// </summary>
+    /// <param name="offerId">id оффера.</param>
+    /// <returns>Все отзывы оффера.</returns>
     public IEnumerable<Models.Feedback> GetFeedbacks(Guid offerId)
     {
         using (DbCtx db = new DbCtx())

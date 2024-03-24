@@ -17,12 +17,12 @@
         </member>
         <member name="T:BooksExchanger.Attributes.Auth.CheckAuthorizeAttribute">
             <summary>
-            Атрибут авторизации с правами админа.
+            Атрибут проверки авторизации.
             </summary>
         </member>
         <member name="M:BooksExchanger.Attributes.Auth.CheckAuthorizeAttribute.OnAuthorization(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)">
             <summary>
-            Проверка авторизации админа.
+            Проверка авторизации.
             </summary>
             <param name="context"></param>
         </member>
@@ -41,6 +41,12 @@
             <summary>
             Контроллер авторов.
             </summary>
+        </member>
+        <member name="M:BooksExchanger.Controllers.AuthorsController.#ctor(BooksExchanger.Services.Interfaces.IAuthorService)">
+            <summary>
+            Конструктор контроллера.
+            </summary>
+            <param name="authorService">Сервис авторов.</param>
         </member>
         <member name="M:BooksExchanger.Controllers.AuthorsController.Create(BooksExchanger.Controllers.Specs.Authors.CreateAuthorRequest)">
             <summary>
@@ -104,6 +110,12 @@
             <summary>
             Контроллер книг.
             </summary>
+        </member>
+        <member name="M:BooksExchanger.Controllers.BooksController.#ctor(BooksExchanger.Services.Interfaces.IBookService)">
+            <summary>
+            Конструктор контроллера.
+            </summary>
+            <param name="bookService">Сервис книг.</param>
         </member>
         <member name="M:BooksExchanger.Controllers.BooksController.Create(BooksExchanger.Controllers.Specs.Books.CreateBookRequest)">
             <summary>
@@ -169,6 +181,13 @@
             Контроллер чатов.
             </summary>
         </member>
+        <member name="M:BooksExchanger.Controllers.ChatController.#ctor(BooksExchanger.Services.Interfaces.IChatService,BooksExchanger.Services.Interfaces.IUserService)">
+            <summary>
+            Конструктор контроллера.
+            </summary>
+            <param name="chatService">Сервис чатов.</param>
+            <param name="userService">Сервис пользователей.</param>
+        </member>
         <member name="M:BooksExchanger.Controllers.ChatController.GetChats">
             <summary>
             Отдает все чаты пользователя.
@@ -192,6 +211,12 @@
             <summary>
             Контроллер отзывов.
             </summary>
+        </member>
+        <member name="M:BooksExchanger.Controllers.FeedbacksConstroller.#ctor(BooksExchanger.Services.Interfaces.IFeedbackService)">
+            <summary>
+            Конструктор контроллера.
+            </summary>
+            <param name="feedbackService">Сервис отзывов.</param>
         </member>
         <member name="M:BooksExchanger.Controllers.FeedbacksConstroller.AddFeedback(System.Guid,BooksExchanger.Controllers.Specs.Offers.AddFeedbackRequest)">
             <summary>
@@ -232,6 +257,12 @@
             <summary>
             Контроллер жанров.
             </summary>
+        </member>
+        <member name="M:BooksExchanger.Controllers.GenresController.#ctor(BooksExchanger.Services.Interfaces.IGenreService)">
+            <summary>
+            Конструктор контроллера.
+            </summary>
+            <param name="genreService">Сервис жанров.</param>
         </member>
         <member name="M:BooksExchanger.Controllers.GenresController.CreateGenre(BooksExchanger.Models.Requests.AddGenreRequest)">
             <summary>
@@ -297,6 +328,12 @@
             <summary>
             Контроллер офферов на модрации.
             </summary>
+        </member>
+        <member name="M:BooksExchanger.Controllers.OffersCollectorController.#ctor(BooksExchanger.Services.Interfaces.IOffersCollectorService)">
+            <summary>
+            Конструктор контроллера.
+            </summary>
+            <param name="offersCollectorService">Сервис офферов на модерации.</param>
         </member>
         <member name="M:BooksExchanger.Controllers.OffersCollectorController.CreateOffer(BooksExchanger.Controllers.Specs.OffersCollector.CreateOfferRequest)">
             <summary>
@@ -380,6 +417,12 @@
             Контроллер офферов.
             </summary>
         </member>
+        <member name="M:BooksExchanger.Controllers.OffersController.#ctor(BooksExchanger.Services.Interfaces.IOfferService)">
+            <summary>
+            Конструктор контроллера.
+            </summary>
+            <param name="offerService">Сервис офферов.</param>
+        </member>
         <member name="M:BooksExchanger.Controllers.OffersController.GetOffer(System.Guid)">
             <summary>
             Возвращает оффер по id.
@@ -460,6 +503,12 @@
             <summary>
             Контроллер поиска.
             </summary>
+        </member>
+        <member name="M:BooksExchanger.Controllers.SearchController.#ctor(BooksExchanger.Services.Interfaces.IOfferService)">
+            <summary>
+            Конструктор контроллера.
+            </summary>
+            <param name="offerService">Сервис офферов.</param>
         </member>
         <member name="M:BooksExchanger.Controllers.SearchController.SearchByTitle(System.String)">
             <summary>
@@ -1229,6 +1278,17 @@
             Контроллер пользователей.
             </summary>
         </member>
+        <member name="M:BooksExchanger.Controllers.UserController.#cctor">
+            <summary>
+            Статический конструктор контроллера.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Controllers.UserController.#ctor(BooksExchanger.Services.Interfaces.IUserService)">
+            <summary>
+            Конструктор контроллера.
+            </summary>
+            <param name="userService">Сервис пользователей.</param>
+        </member>
         <member name="M:BooksExchanger.Controllers.UserController.AuthorizeUser(BooksExchanger.Models.Requests.AuthRequest)">
             <summary>
             Выдает токен авторизации.
@@ -1273,6 +1333,12 @@
             <response code="403">Пользователь не является админом.</response>
             <response code="404">Пользователь с такой почтой не существует.</response>
             <response code="409">Пользователь уже является админом.</response>
+        </member>
+        <member name="M:BooksExchanger.Controllers.UserController.CheckToken">
+            <summary>
+            Проверяет авторизацию пользователя.
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:BooksExchanger.Middlewares.JwtMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Options.IOptions{BooksExchanger.Settings.AppSettings})">
             <summary>
@@ -1321,6 +1387,18 @@
             <summary>
             Токен авторизации.
             </summary>
+        </member>
+        <member name="T:BooksExchanger.Models.PasswordHasher">
+            <summary>
+            Класс для хеширования паролей.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Models.PasswordHasher.HashPassword(System.String)">
+            <summary>
+            Хеширует пароль.
+            </summary>
+            <param name="password">Пароль.</param>
+            <returns>Захешированный пароль.</returns>
         </member>
         <member name="T:BooksExchanger.Models.ResponseMapper">
             <summary>
@@ -2066,6 +2144,26 @@
             Конструктор.
             </summary>
         </member>
+        <member name="T:BooksExchanger.Repositories.Exeptions.GenreAlreadyExistsException">
+            <summary>
+            Жанр уже существует.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.GenreAlreadyExistsException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.GenreAlreadyExistsException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.GenreAlreadyExistsException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
         <member name="T:BooksExchanger.Repositories.Exeptions.GenreNotFoundException">
             <summary>
             Жанр не найден.
@@ -2186,6 +2284,26 @@
             Конструктор.
             </summary>
         </member>
+        <member name="T:BooksExchanger.Repositories.Exeptions.RemoveBookNotAllowedException">
+            <summary>
+            Удалить книгу невозможно.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.RemoveBookNotAllowedException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.RemoveBookNotAllowedException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Exeptions.RemoveBookNotAllowedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
         <member name="T:BooksExchanger.Repositories.Exeptions.RemoveGenreNotAllowedException">
             <summary>
             Нельзя удалить жанр.
@@ -2251,6 +2369,11 @@
             Хранилице авторов.
             </summary>
         </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.AuthorRepository.#ctor">
+            <summary>
+            Конструктор хранилища авторов.
+            </summary>
+        </member>
         <member name="M:BooksExchanger.Repositories.Implementations.AuthorRepository.InsertAuthor(System.String)">
             <summary>
             Добавление автора.
@@ -2288,6 +2411,11 @@
         <member name="T:BooksExchanger.Repositories.Implementations.BookRepository">
             <summary>
             Хранилище книг.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.BookRepository.#ctor">
+            <summary>
+            Конструктор хранилища книг.
             </summary>
         </member>
         <member name="M:BooksExchanger.Repositories.Implementations.BookRepository.InsertBook(System.String,System.Int32,System.Collections.Generic.List{System.Int64})">
@@ -2334,6 +2462,11 @@
             Хранилище чатов.
             </summary>
         </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.ChatRepository.#ctor">
+            <summary>
+            Конструктор хранилища чатов.
+            </summary>
+        </member>
         <member name="M:BooksExchanger.Repositories.Implementations.ChatRepository.GetChats(System.Int64,System.Boolean)">
             <summary>
             Получение чатов.
@@ -2373,6 +2506,11 @@
             Хранилище отзывов.
             </summary>
         </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.FeedbackRepository.#ctor">
+            <summary>
+            Конструктор хранилища отзывов.
+            </summary>
+        </member>
         <member name="M:BooksExchanger.Repositories.Implementations.FeedbackRepository.UpdateFeedback(System.Int64,System.Guid,System.String,System.Nullable{System.Int32},BooksExchanger.Models.BookEstimation)">
             <summary>
             Добавляет или обновляет отзыв.
@@ -2394,6 +2532,676 @@
             <param name="text">Текст отзыва.</param>
             <param name="estimation">Оценка книги.</param>
             <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.FeedbackRepository.GetFeedback(System.Guid,System.Int64)">
+            <summary>
+            Получает отзыв.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <param name="authorId">Идентификатор автора отзыва.</param>
+            <returns>Отзыв или null, если отзыв не найден.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.FeedbackRepository.GetFeedback(System.Int64)">
+            <summary>
+            Получает отзыв по идентификатору.
+            </summary>
+            <param name="feedbackId">Идентификатор отзыва.</param>
+            <returns>Отзыв или null, если отзыв не найден.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.FeedbackRepository.RemoveFeedback(System.Int64)">
+            <summary>
+            Удаляет отзыв.
+            </summary>
+            <param name="feedbackId">Идентификатор отзыва.</param>
+            <returns>True, если отзыв успешно удалён, иначе False.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.FeedbackRepository.GetFeedbacks(System.Guid)">
+            <summary>
+            Получает отзывы оффера.
+            </summary>
+            <param name="offerId">id оффера.</param>
+            <returns>Все отзывы оффера.</returns>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Implementations.GenreRepository">
+            <summary>
+            Репозиторий для управления жанрами в базе данных.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.GenreRepository.#ctor">
+            <summary>
+            Инициализирует новый экземпляр класса <see cref="T:BooksExchanger.Repositories.Implementations.GenreRepository"/>.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.GenreRepository.InsertGenre(System.String)">
+            <summary>
+            Вставляет новый жанр в базу данных.
+            </summary>
+            <param name="name">Название жанра для вставки.</param>
+            <returns>Сгенерированный идентификатор для вставленного жанра.</returns>
+            <exception cref="T:BooksExchanger.Repositories.Exeptions.GenreAlreadyExistsException">Исключение, возникающее, когда жанр с таким именем уже существует.</exception>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.GenreRepository.UpdateGenre(System.Int32,System.String)">
+            <summary>
+            Обновляет название существующего жанра в базе данных.
+            </summary>
+            <param name="id">Идентификатор жанра для обновления.</param>
+            <param name="name">Новое название для жанра.</param>
+            <returns>Идентификатор обновленного жанра.</returns>
+            <exception cref="T:BooksExchanger.Repositories.Exeptions.GenreNotFoundException">Исключение, возникающее, когда жанр с указанным идентификатором не существует.</exception>
+            <exception cref="T:BooksExchanger.Repositories.Exeptions.GenreAlreadyExistsException">Исключение, возникающее, когда жанр с обновленным названием уже существует.</exception>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.GenreRepository.GetGenres">
+            <summary>
+            Извлекает коллекцию всех жанров из базы данных.
+            </summary>
+            <returns>Коллекция <see cref="T:BooksExchanger.Models.Genre"/>.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:BooksExchanger.Repositories.Implementations.GenreRepository.GetGenres(System.Func{System.String,System.Boolean})" -->
+        <member name="M:BooksExchanger.Repositories.Implementations.GenreRepository.RemoveGenre(System.Int32)">
+            <summary>
+            Удаляет жанр из базы данных.
+            </summary>
+            <param name="id">Идентификатор удаляемого жанра.</param>
+            <exception cref="T:BooksExchanger.Repositories.Exeptions.GenreNotFoundException">Исключение, возникающее, когда жанр с указанным идентификатором не существует.</exception>
+            <exception cref="T:BooksExchanger.Repositories.Exeptions.RemoveGenreNotAllowedException">Исключение, возникающее, когда невозможно удалить жанр, поскольку к нему привязаны книги.</exception>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.OfferRepository.#ctor">
+            <summary>
+            Инициализирует новый экземпляр класса <see cref="T:BooksExchanger.Repositories.Implementations.OfferRepository"/>.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.OfferRepository.GetOffer(System.Guid)">
+            <summary>
+            Получает предложение по его уникальному идентификатору.
+            </summary>
+            <param name="offerId">Уникальный идентификатор предложения.</param>
+            <returns>Найденное предложение.</returns>
+            <exception cref="T:BooksExchanger.Repositories.Exeptions.OfferNotFoundException">Исключение выбрасывается, если предложение с указанным ID не найдено.</exception>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.OfferRepository.IsFavoriteForUser(System.Int64,System.Guid)">
+            <summary>
+            Определяет, добавлено ли предложение в избранные у пользователя.
+            </summary>
+            <param name="userId">Идентификатор пользователя.</param>
+            <param name="offerId">Идентификатор предложения.</param>
+            <returns>Возвращает true, если предложение находится в избранных у пользователя, иначе false.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.OfferRepository.GetOffers(System.Func{System.Int32,System.Boolean},System.Func{System.String,System.Boolean},System.Func{System.Int64,System.Boolean},System.Func{System.Int64,System.Boolean})">
+            <summary>
+            Получает перечень предложений с возможностью фильтрации.
+            </summary>
+            <param name="genreFilter">Необязательный фильтр по идентификатору жанра.</param>
+            <param name="cityFilter">Необязательный фильтр по городу.</param>
+            <param name="userFilter">Необязательный фильтр по идентификатору пользователя.</param>
+            <param name="notUserFilter">Необязательный фильтр для исключения предложений от определенного пользователя.</param>
+            <returns>Перечень предложений, соответствующих заданным критериям.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.OfferRepository.GetOffersByGenre(System.Int32,System.Func{System.String,System.Boolean},System.Func{System.Int64,System.Boolean})">
+            <summary>
+            Получает предложения по жанру с возможностью дополнительной фильтрации.
+            </summary>
+            <param name="genreId">Идентификатор жанра.</param>
+            <param name="cityFilter">Необязательный фильтр по городу.</param>
+            <param name="notUserFilter">Необязательный фильтр для исключения предложений от определенного пользователя.</param>
+            <returns>Перечень предложений по указанному жанру.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.OfferRepository.GetOffersByTitleStart(System.String)">
+            <summary>
+            Получает предложения, начинающиеся с заданного названия.
+            </summary>
+            <param name="title">Начало названия для поиска.</param>
+            <returns>Перечень предложений с названиями, начинающимися с указанного текста.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.OfferRepository.GetOffersByAuthorStart(System.String)">
+            <summary>
+            Получает предложения по началу имени автора.
+            </summary>
+            <param name="author">Начало имени автора для поиска.</param>
+            <returns>Перечень предложений, авторы которых начинаются с указанного текста.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.OfferRepository.AddOfferToFavorite(System.Guid,System.Int64)">
+            <summary>
+            Добавляет предложение в избранные у пользователя.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <param name="userId">Идентификатор пользователя.</param>
+            <exception cref="T:BooksExchanger.Repositories.Exeptions.OfferNotFoundException">Исключение выбрасывается, если предложение с указанным ID не найдено.</exception>
+            <exception cref="T:BooksExchanger.Repositories.Exeptions.OfferAlreadyFavoriteException">Исключение выбрасывается, если предложение уже добавлено в избранные.</exception>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.OfferRepository.RemoveOfferFromFavorite(System.Guid,System.Int64)">
+            <summary>
+            Удаляет предложение из избранных у пользователя.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <param name="userId">Идентификатор пользователя.</param>
+            <exception cref="T:BooksExchanger.Repositories.Exeptions.OfferAlreadyNotInFavoritesException">Исключение выбрасывается, если предложения нет в избранных у пользователя.</exception>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.OfferRepository.RemoveOffer(System.Guid)">
+            <summary>
+            Удаляет предложение из репозитория.
+            </summary>
+            <param name="offerId">Идентификатор предложения, которое необходимо удалить.</param>
+            <exception cref="T:BooksExchanger.Repositories.Exeptions.OfferNotFoundException">Исключение выбрасывается, если предложение с указанным ID не найдено.</exception>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.OfferRepository.IsUserOwnerOffer(System.Guid,System.Int64)">
+            <summary>
+            Проверяет, является ли пользователь владельцем предложения.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <param name="userId">Идентификатор пользователя.</param>
+            <returns>Возвращает true, если пользователь является владельцем предложения, иначе false.</returns>
+            <exception cref="T:BooksExchanger.Repositories.Exeptions.OfferNotFoundException">Исключение выбрасывается, если предложение с указанным ID не найдено.</exception>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.OfferRepository.GetFavoriteOffers(System.Int64)">
+            <summary>
+            Получает список избранных предложений пользователя.
+            </summary>
+            <param name="userId">Идентификатор пользователя.</param>
+            <returns>Перечень избранных предложений пользователя.</returns>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Implementations.OffersCollectorRepository">
+            <summary>
+            Репозиторий для работы с объявлениями о книгах.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.OffersCollectorRepository.#ctor">
+            <summary>
+            Конструктор репозитория.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.OffersCollectorRepository.AddOffer(System.Int64,System.String,System.String,System.String,System.String,System.String,System.Nullable{System.Decimal})">
+            <summary>
+            Добавляет новое объявление в базу данных.
+            </summary>
+            <param name="userId">Идентификатор пользователя, создавшего объявление.</param>
+            <param name="title">Название книги.</param>
+            <param name="authors">Авторы книги.</param>
+            <param name="city">Город, в котором расположена книга.</param>
+            <param name="description">Описание книги (необязательно).</param>
+            <param name="imageLink">Ссылка на изображение книги (необязательно).</param>
+            <param name="price">Цена книги (необязательно).</param>
+            <returns>Идентификатор созданного объявления.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.OffersCollectorRepository.SetRejectAndReason(System.Guid,System.String)">
+            <summary>
+            Устанавливает статус объявления как отклоненный и указывает причину отклонения.
+            </summary>
+            <param name="offerId">Идентификатор объявления.</param>
+            <param name="reason">Причина отклонения объявления.</param>
+            <returns>Идентификатор объявления.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.OffersCollectorRepository.MoveOfferToApprovedOffers(System.Guid,System.Int64)">
+            <summary>
+            Перемещает объявление в подтвержденные, связывая его с указанной книгой.
+            </summary>
+            <param name="offerId">Идентификатор объявления.</param>
+            <param name="linkedBookId">Идентификатор связанной книги.</param>
+            <returns>Идентификатор нового объявления в подтвержденных.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.OffersCollectorRepository.CheckUserOwner(System.Guid,System.Int64)">
+            <summary>
+            Проверяет, принадлежит ли объявление указанному пользователю.
+            </summary>
+            <param name="offerId">Идентификатор объявления.</param>
+            <param name="userId">Идентификатор пользователя.</param>
+            <returns>True, если объявление принадлежит пользователю и False, если нет.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.OffersCollectorRepository.RemoveOffer(System.Guid)">
+            <summary>
+            Удаляет объявление из базы данных.
+            </summary>
+            <param name="offerId">Идентификатор объявления.</param>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.OffersCollectorRepository.GetOffer(System.Nullable{System.Guid})">
+            <summary>
+            Получает объявление по его идентификатору.
+            </summary>
+            <param name="offerId">Идентификатор объявления.</param>
+            <returns>Объект объявления.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.OffersCollectorRepository.GetOffers(System.Collections.Generic.HashSet{BooksExchanger.Models.ModerationStatus},System.Nullable{System.Int64})">
+            <summary>
+            Получает список объявлений согласно заданным статусам модерации и, опционально, идентификатору пользователя.
+            </summary>
+            <param name="moderationStatusSet">Набор статусов модерации.</param>
+            <param name="userId">Идентификатор пользователя (необязательно).</param>
+            <returns>Список объявлений.</returns>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Implementations.UserRepository">
+            <summary>
+            Реализация репозитория пользователей.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.UserRepository.#ctor">
+            <summary>
+            Создает экземпляр UserRepository.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.UserRepository.GetUserByEmail(System.String)">
+            <summary>
+            Получает пользователя по его электронной почте.
+            </summary>
+            <param name="email">Электронная почта пользователя.</param>
+            <returns>Модель <see cref="T:BooksExchanger.Models.User"/>, если пользователь с такой почтой существует, иначе null.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.UserRepository.TryAddNewUser(System.String,System.String,System.String)">
+            <summary>
+            Пытается добавить нового пользователя в систему.
+            </summary>
+            <param name="name">Имя пользователя.</param>
+            <param name="email">Электронная почта пользователя.</param>
+            <param name="password">Пароль пользователя.</param>
+            <returns>Модель <see cref="T:BooksExchanger.Models.User"/> добавленного пользователя.</returns>
+            <exception cref="T:BooksExchanger.Repositories.Exeptions.UserAlreadyExistException">Бросается, если пользователь с такой почтой уже существует.</exception>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.UserRepository.SetAdminByEmail(System.String)">
+            <summary>
+            Назначает роль администратора пользователю по его электронной почте.
+            </summary>
+            <param name="email">Электронная почта пользователя.</param>
+            <exception cref="T:BooksExchanger.Repositories.Exeptions.UserNotFoundException">Бросается, если пользователь с такой почтой не найден.</exception>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Implementations.UserRepository.IsUserExist(System.Int64)">
+            <summary>
+            Проверяет, существует ли пользователь по его идентификатору.
+            </summary>
+            <param name="userId">Идентификатор пользователя.</param>
+            <returns>true, если пользователь существует; иначе false.</returns>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Interfaces.IAuthorRepository">
+            <summary>
+            Интерфейс репозитория для работы с авторами.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IAuthorRepository.InsertAuthor(System.String)">
+            <summary>
+            Добавляет нового автора в систему.
+            </summary>
+            <param name="name">Имя автора.</param>
+            <returns>Идентификатор добавленного автора.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IAuthorRepository.UpdateAuthor(System.Int64,System.String)">
+            <summary>
+            Обновляет информацию об авторе.
+            </summary>
+            <param name="id">Идентификатор автора, информацию о котором необходимо обновить.</param>
+            <param name="name">Новое имя автора.</param>
+            <returns>Идентификатор обновленного автора.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IAuthorRepository.GetAuthors">
+            <summary>
+            Получает список всех авторов.
+            </summary>
+            <returns>Коллекция авторов.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IAuthorRepository.GetAuthors(System.Func{System.String,System.Boolean})">
+            <summary>
+            Получает список авторов, соответствующих заданному условию.
+            </summary>
+            <param name="filter">Функция фильтрации авторов по их имени.</param>
+            <returns>Коллекция отфильтрованных авторов.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IAuthorRepository.RemoveAuthor(System.Int64)">
+            <summary>
+            Удаляет автора по идентификатору.
+            </summary>
+            <param name="id">Идентификатор автора, которого необходимо удалить.</param>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Interfaces.IBookRepository">
+            <summary>
+            Определяет методы для работы с книгами в хранилище.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IBookRepository.InsertBook(System.String,System.Int32,System.Collections.Generic.List{System.Int64})">
+            <summary>
+            Добавляет новую книгу в хранилище.
+            </summary>
+            <param name="title">Название книги.</param>
+            <param name="genreId">Идентификатор жанра книги.</param>
+            <param name="authorIds">Список идентификаторов авторов книги.</param>
+            <returns>Идентификатор добавленной книги.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IBookRepository.UpdateBook(System.Int64,System.String,System.Int32,System.Collections.Generic.List{System.Int64})">
+            <summary>
+            Обновляет информацию о книге в хранилище.
+            </summary>
+            <param name="bookId">Идентификатор книги, информацию о которой нужно обновить.</param>
+            <param name="title">Новое название книги.</param>
+            <param name="genreId">Новый идентификатор жанра книги.</param>
+            <param name="authorIds">Новый список идентификаторов авторов книги.</param>
+            <returns>Идентификатор обновленной книги.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IBookRepository.GetBooks(System.Func{System.Int64,System.Boolean})">
+            <summary>
+            Получает книги из хранилища по заданному фильтру по идентификатору.
+            </summary>
+            <param name="filter">Функция фильтрации по идентификатору книги.</param>
+            <returns>Список книг, удовлетворяющих условиям фильтра.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IBookRepository.GetBooks(System.Func{System.String,System.Boolean})">
+            <summary>
+            Получает книги из хранилища по заданному фильтру по названию.
+            </summary>
+            <param name="filter">Функция фильтрации по названию книги.</param>
+            <returns>Перечисление книг, удовлетворяющих условиям фильтра.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IBookRepository.RemoveBook(System.Int64)">
+            <summary>
+            Удаляет книгу из хранилища по её идентификатору.
+            </summary>
+            <param name="bookId">Идентификатор книги для удаления.</param>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Interfaces.IChatRepository">
+            <summary>
+            Интерфейс репозитория для работы с чатами.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IChatRepository.GetChats(System.Int64,System.Boolean)">
+            <summary>
+            Получает список чатов для пользователя.
+            </summary>
+            <param name="userId">Идентификатор пользователя, для которого необходимо получить списки чатов.</param>
+            <param name="needOrderMessagesByDescending">Если true, сообщения в чатах упорядочиваются по убыванию; в противном случае, по возрастанию.</param>
+            <returns>Коллекция чатов пользователя.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IChatRepository.GetChatWithMessages(System.Int64,System.Int64,System.Boolean)">
+            <summary>
+            Получает чат между двумя пользователями с историей сообщений.
+            </summary>
+            <param name="firstUserId">Идентификатор первого пользователя.</param>
+            <param name="secondUserId">Идентификатор второго пользователя.</param>
+            <param name="needOrderMessagesByDescending">Если true, сообщения упорядочиваются по убыванию; в противном случае, по возрастанию.</param>
+            <returns>Чат между пользователями с историей сообщений или null, если чат не найден.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IChatRepository.CreateChatWithMessages(System.Int64,System.Int64)">
+            <summary>
+            Создает чат между двумя пользователями.
+            </summary>
+            <param name="firstUserId">Идентификатор первого пользователя.</param>
+            <param name="secondUserId">Идентификатор второго пользователя.</param>
+            <returns>Созданный чат с сообщениями.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IChatRepository.AddMessage(System.Int64,System.Int64,System.String)">
+            <summary>
+            Добавляет сообщение в чат.
+            </summary>
+            <param name="senderId">Идентификатор отправителя сообщения.</param>
+            <param name="chatId">Идентификатор чата, в который добавляется сообщение.</param>
+            <param name="text">Текст сообщения.</param>
+            <returns>Идентификатор созданного сообщения.</returns>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Interfaces.IFeedbackRepository">
+            <summary>
+            Интерфейс хранилища отзывов.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IFeedbackRepository.UpdateFeedback(System.Int64,System.Guid,System.String,System.Nullable{System.Int32},BooksExchanger.Models.BookEstimation)">
+            <summary>
+            Обновляет отзыв.
+            </summary>
+            <param name="authorId">id автора отзыва.</param>
+            <param name="offerId">id оффера.</param>
+            <param name="text">Текст отзыва.</param>
+            <param name="estimation">Оценка от пользователя.</param>
+            <param name="bookEstimation"></param>
+            <returns>Оценка книги.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IFeedbackRepository.InsertFeedback(System.Int64,System.Guid,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Вставляет новый отзыв.
+            </summary>
+            <param name="authorId">Идентификатор автора отзыва.</param>
+            <param name="offerId">Идентификатор предложения.</param>
+            <param name="text">Текст отзыва.</param>
+            <param name="estimation">Оценка отзыва (может быть null).</param>
+            <returns>Идентификатор вновь вставленного отзыва.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IFeedbackRepository.GetFeedback(System.Guid,System.Int64)">
+            <summary>
+            Получает отзыв по идентификатору предложения и автора.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <param name="authorId">Идентификатор автора отзыва.</param>
+            <returns>Объект отзыва или null, если отзыв не найден.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IFeedbackRepository.GetFeedback(System.Int64)">
+            <summary>
+            Получает отзыв по идентификатору отзыва.
+            </summary>
+            <param name="feedbackId">Идентификатор отзыва.</param>
+            <returns>Объект отзыва или null, если отзыв не найден.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IFeedbackRepository.RemoveFeedback(System.Int64)">
+            <summary>
+            Удаляет отзыв.
+            </summary>
+            <param name="feedbackId">Идентификатор отзыва.</param>
+            <returns>True, если отзыв успешно удален; иначе false.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IFeedbackRepository.GetFeedbacks(System.Guid)">
+            <summary>
+            Получает список отзывов по идентификатору предложения.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Interfaces.IGenreRepository">
+            <summary>
+            Предоставляет интерфейс для работы с жанрами в репозитории.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IGenreRepository.InsertGenre(System.String)">
+            <summary>
+            Добавляет новый жанр в репозиторий.
+            </summary>
+            <param name="name">Название жанра.</param>
+            <returns>Идентификатор добавленного жанра.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IGenreRepository.UpdateGenre(System.Int32,System.String)">
+            <summary>
+            Обновляет информацию о жанре.
+            </summary>
+            <param name="id">Идентификатор жанра, который необходимо обновить.</param>
+            <param name="name">Новое название жанра.</param>
+            <returns>Идентификатор обновленного жанра.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IGenreRepository.GetGenres">
+            <summary>
+            Получает все жанры из репозитория.
+            </summary>
+            <returns>Перечисление жанров.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IGenreRepository.GetGenres(System.Func{System.String,System.Boolean})">
+            <summary>
+            Получает жанры, удовлетворяющие заданному условию фильтра.
+            </summary>
+            <param name="filter">Функция фильтрации жанров по названию.</param>
+            <returns>Перечисление жанров, удовлетворяющих условию фильтра.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IGenreRepository.RemoveGenre(System.Int32)">
+            <summary>
+            Удаляет жанр из репозитория по его идентификатору.
+            </summary>
+            <param name="id">Идентификатор жанра, который необходимо удалить.</param>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Interfaces.IOfferRepository">
+            <summary>
+            Интерфейс хранилища офферов.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IOfferRepository.GetOffer(System.Guid)">
+            <summary>
+            Возвращает отзыв.
+            </summary>
+            <param name="offerId">id отзыва.</param>
+            <returns>Информация об отзыве.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IOfferRepository.IsFavoriteForUser(System.Int64,System.Guid)">
+            <summary>
+            Проверяет, является ли предложение избранным для пользователя.
+            </summary>
+            <param name="userId">Идентификатор пользователя.</param>
+            <param name="offerId">Идентификатор предложения.</param>
+            <returns>True, если предложение избранное для пользователя; иначе false.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IOfferRepository.GetOffers(System.Func{System.Int32,System.Boolean},System.Func{System.String,System.Boolean},System.Func{System.Int64,System.Boolean},System.Func{System.Int64,System.Boolean})">
+            <summary>
+            Возвращает список предложений с учетом указанных функций фильтрации.
+            </summary>
+            <param name="genreFilter">Функция фильтрации по жанру.</param>
+            <param name="cityFilter">Функция фильтрации по городу.</param>
+            <param name="userFilter">Функция фильтрации по идентификатору пользователя.</param>
+            <param name="notUserFilter">Функция фильтрации по идентификатору пользователя, исключая указанного.</param>
+            <returns>Коллекция объектов предложений.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IOfferRepository.AddOfferToFavorite(System.Guid,System.Int64)">
+            <summary>
+            Добавляет предложение в избранное для пользователя.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <param name="userId">Идентификатор пользователя.</param>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IOfferRepository.RemoveOfferFromFavorite(System.Guid,System.Int64)">
+            <summary>
+            Удаляет предложение из избранного для пользователя.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <param name="userId">Идентификатор пользователя.</param>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IOfferRepository.RemoveOffer(System.Guid)">
+            <summary>
+            Удаляет предложение.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:BooksExchanger.Repositories.Interfaces.IOfferRepository.IsUserOwnerOffer(System.Guid,System.Int64)" -->
+        <member name="M:BooksExchanger.Repositories.Interfaces.IOfferRepository.GetFavoriteOffers(System.Int64)">
+            <summary>
+            Возвращает список избранных предложений для пользователя.
+            </summary>
+            <param name="userId">Идентификатор пользователя.</param>
+            <returns>Коллекция объектов предложений избранных для пользователя.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IOfferRepository.GetOffersByGenre(System.Int32,System.Func{System.String,System.Boolean},System.Func{System.Int64,System.Boolean})">
+            <summary>
+            Возвращает список предложений по указанному жанру с учетом функций фильтрации.
+            </summary>
+            <param name="genreId">Идентификатор жанра.</param>
+            <param name="cityFilter">Функция фильтрации по городу.</param>
+            <param name="notUserFilter">Функция фильтрации по идентификатору пользователя, исключая указанного.</param>
+            <returns>Коллекция объектов предложений по указанному жанру.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IOfferRepository.GetOffersByTitleStart(System.String)">
+            <summary>
+            Возвращает список предложений, название которых начинается с указанной строки.
+            </summary>
+            <param name="title">Начальная строка названия предложения.</param>
+            <returns>Коллекция объектов предложений.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IOfferRepository.GetOffersByAuthorStart(System.String)">
+            <summary>
+            Возвращает список предложений, автор которых начинается с указанной строки.
+            </summary>
+            <param name="author">Начальная строка для имени автора предложения.</param>
+            <returns>Коллекция объектов предложений.</returns>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Interfaces.IOffersCollectorRepository">
+            <summary>
+            Интерфейс репозитория для управления предложениями книг.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IOffersCollectorRepository.AddOffer(System.Int64,System.String,System.String,System.String,System.String,System.String,System.Nullable{System.Decimal})">
+            <summary>
+            Добавляет новое предложение книги.
+            </summary>
+            <param name="userId">Идентификатор пользователя, создавшего предложение.</param>
+            <param name="title">Название книги.</param>
+            <param name="authors">Авторы книги.</param>
+            <param name="city">Город, в котором находится книга.</param>
+            <param name="description">Описание книги (необязательно).</param>
+            <param name="imageLink">Ссылка на изображение обложки книги (необязательно).</param>
+            <param name="price">Цена книги (необязательно).</param>
+            <returns>Идентификатор созданного предложения.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IOffersCollectorRepository.SetRejectAndReason(System.Guid,System.String)">
+            <summary>
+            Устанавливает для предложения статус "отклонено" с указанием причины.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <param name="reason">Причина отклонения предложения.</param>
+            <returns>Идентификатор предложения.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IOffersCollectorRepository.MoveOfferToApprovedOffers(System.Guid,System.Int64)">
+            <summary>
+            Перемещает предложение в подтвержденные с привязкой к существующей книге.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <param name="linkedBookId">Идентификатор связанной книги.</param>
+            <returns>Идентификатор нового предложения в списке подтвержденных.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IOffersCollectorRepository.CheckUserOwner(System.Guid,System.Int64)">
+            <summary>
+            Проверяет, принадлежит ли предложение указанному пользователю.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <param name="userId">Идентификатор пользователя.</param>
+            <returns>True, если пользователь является владельцем предложения; иначе false.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IOffersCollectorRepository.RemoveOffer(System.Guid)">
+            <summary>
+            Удаляет предложение.
+            </summary>
+            <param name="offerId">Идентификатор предложения для удаления.</param>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IOffersCollectorRepository.GetOffer(System.Nullable{System.Guid})">
+            <summary>
+            Получает информацию о предложении по его идентификатору.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <returns>Предложение с информацией или null, если предложение не найдено.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IOffersCollectorRepository.GetOffers(System.Collections.Generic.HashSet{BooksExchanger.Models.ModerationStatus},System.Nullable{System.Int64})">
+            <summary>
+            Получает список предложений по заданным статусам модерации и, опционально, идентификатору пользователя.
+            </summary>
+            <param name="moderationStatusSet">Набор статусов модерации.</param>
+            <param name="userId">Идентификатор пользователя (необязательно).</param>
+            <returns>Список предложений.</returns>
+        </member>
+        <member name="T:BooksExchanger.Repositories.Interfaces.IUserRepository">
+            <summary>
+            Интерфейс репозитория пользователей.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IUserRepository.GetUserByEmail(System.String)">
+            <summary>
+            Получает пользователя по его электронной почте.
+            </summary>
+            <param name="email">Электронная почта пользователя.</param>
+            <returns>Модель пользователя, если пользователь существует; иначе null.</returns>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IUserRepository.TryAddNewUser(System.String,System.String,System.String)">
+            <summary>
+            Пытается добавить нового пользователя в систему.
+            </summary>
+            <param name="name">Имя пользователя.</param>
+            <param name="email">Электронная почта пользователя.</param>
+            <param name="password">Пароль пользователя.</param>
+            <returns>Модель созданного пользователя.</returns>
+            <remarks>Метод генерирует исключение, если пользователь с такой электронной почтой уже существует.</remarks>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IUserRepository.SetAdminByEmail(System.String)">
+            <summary>
+            Назначает пользователю роль администратора по его электронной почте.
+            </summary>
+            <param name="email">Электронная почта пользователя.</param>
+            <remarks>Метод генерирует исключение, если пользователь с указанной электронной почтой не найден.</remarks>
+        </member>
+        <member name="M:BooksExchanger.Repositories.Interfaces.IUserRepository.IsUserExist(System.Int64)">
+            <summary>
+            Проверяет, существует ли пользователь по его идентификатору.
+            </summary>
+            <param name="userId">Идентификатор пользователя.</param>
+            <returns>True, если пользователь существует; иначе false.</returns>
         </member>
         <member name="T:BooksExchanger.Context.DbCtx">
             <summary>
@@ -2930,6 +3738,1356 @@
             <summary>
             Роль админа.
             </summary>
+        </member>
+        <member name="T:BooksExchanger.Services.Exceptions.AuthorNotFoundException">
+            <summary>
+            Автора не найдено.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.AuthorNotFoundException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.AuthorNotFoundException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.AuthorNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Services.Exceptions.BookNotFoundException">
+            <summary>
+            Книга не найдена.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.BookNotFoundException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.BookNotFoundException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.BookNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Services.Exceptions.FeedbackNotFoundException">
+            <summary>
+            Не найден отзыв.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.FeedbackNotFoundException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.FeedbackNotFoundException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.FeedbackNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Services.Exceptions.GenreAlreadyExistsException">
+            <summary>
+            Жанр уже существует.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.GenreAlreadyExistsException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.GenreAlreadyExistsException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.GenreAlreadyExistsException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Services.Exceptions.GenreNotFoundException">
+            <summary>
+            Жанра не найдено.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.GenreNotFoundException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.GenreNotFoundException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.GenreNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Services.Exceptions.OfferAlreadyApprovedException">
+            <summary>
+            Оффер уже подтвержден.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.OfferAlreadyApprovedException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.OfferAlreadyApprovedException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.OfferAlreadyApprovedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Services.Exceptions.OfferAlreadyFavoriteException">
+            <summary>
+            Оффер уже находится в избранном.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.OfferAlreadyFavoriteException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.OfferAlreadyFavoriteException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.OfferAlreadyFavoriteException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Services.Exceptions.OfferAlreadyNotInFavoritesException">
+            <summary>
+            Оффер уже удален из избранного пользователя.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.OfferAlreadyNotInFavoritesException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.OfferAlreadyNotInFavoritesException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.OfferAlreadyNotInFavoritesException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Services.Exceptions.OfferNotFoundException">
+            <summary>
+            Оффер не найден.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.OfferNotFoundException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.OfferNotFoundException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.OfferNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Services.Exceptions.PermissionDenidedException">
+            <summary>
+            Не хватает прав.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.PermissionDenidedException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.PermissionDenidedException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.PermissionDenidedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Services.Exceptions.RemoveAuthorNotAllowedException">
+            <summary>
+            Нельзя удалить автора.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.RemoveAuthorNotAllowedException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.RemoveAuthorNotAllowedException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.RemoveAuthorNotAllowedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Services.Exceptions.RemoveBookNotAllowedException">
+            <summary>
+            Удаленить книгу нельзя.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.RemoveBookNotAllowedException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.RemoveBookNotAllowedException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.RemoveBookNotAllowedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Services.Exceptions.RemoveGenreNotAllowedException">
+            <summary>
+            Удалить жанр нельзя.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.RemoveGenreNotAllowedException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.RemoveGenreNotAllowedException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.RemoveGenreNotAllowedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Services.Exceptions.UserNotOfferOwnerException">
+            <summary>
+            Пользователь не является владельцем объявления.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.UserNotOfferOwnerException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.UserNotOfferOwnerException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Exceptions.UserNotOfferOwnerException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Services.Implementations.UserService.Exceptions.IncorrectPasswordException">
+            <summary>
+            Пароль неверный.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.UserService.Exceptions.IncorrectPasswordException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.UserService.Exceptions.IncorrectPasswordException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.UserService.Exceptions.IncorrectPasswordException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Services.Implementations.UserService.Exceptions.UserAlreadyExistExeption">
+            <summary>
+            Пользователь уже существует.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.UserService.Exceptions.UserAlreadyExistExeption.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.UserService.Exceptions.UserAlreadyExistExeption.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.UserService.Exceptions.UserAlreadyExistExeption.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Services.Implementations.UserService.Exceptions.UserNotFoundException">
+            <summary>
+            Пользователя не существует.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.UserService.Exceptions.UserNotFoundException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.UserService.Exceptions.UserNotFoundException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.UserService.Exceptions.UserNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.Services.Implementations.UserService.UserService">
+            <summary>
+            Сервис пользователей.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.UserService.UserService.#ctor(Microsoft.Extensions.Options.IOptions{BooksExchanger.Settings.AppSettings},BooksExchanger.Repositories.Interfaces.IUserRepository)">
+            <summary>
+            Инициализирует новый экземпляр службы пользователей.
+            </summary>
+            <param name="settings">Настройки приложения.</param>
+            <param name="repository">Репозиторий пользователей.</param>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.UserService.UserService.GetAuthToken(System.String,System.String)">
+            <summary>
+            Генерирует токен аутентификации для пользователя.
+            </summary>
+            <param name="email">Электронная почта пользователя.</param>
+            <param name="password">Пароль пользователя.</param>
+            <returns>Строка, содержащая JWT-токен.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.UserService.UserService.RegisterUser(System.String,System.String,System.String)">
+            <summary>
+            Регистрирует пользователя и генерирует токен аутентификации.
+            </summary>
+            <param name="name">Имя пользователя.</param>
+            <param name="email">Электронная почта пользователя.</param>
+            <param name="password">Пароль пользователя.</param>
+            <returns>Строка, содержащая JWT-токен.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.UserService.UserService.IsUserRegistered(System.String)">
+            <summary>
+            Проверяет, зарегистрирован ли пользователь.
+            </summary>
+            <param name="email">Электронная почта пользователя.</param>
+            <returns>true, если пользователь зарегистрирован; иначе false.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.UserService.UserService.IsUserExist(System.Int64)">
+            <summary>
+            Проверяет, существует ли пользователь.
+            </summary>
+            <param name="userId">Идентификатор пользователя.</param>
+            <returns>true, если пользователь существует; иначе false.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.UserService.UserService.SetAdmin(System.String)">
+            <summary>
+            Назначает пользователю роль администратора.
+            </summary>
+            <param name="email">Электронная почта пользователя.</param>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.UserService.UserService.GenerateJwtToken(BooksExchanger.Models.User)">
+            <summary>
+            Генерирует JWT-токен для пользователя.
+            </summary>
+            <param name="user">Данные пользователя, для которого генерируется токен.</param>
+            <returns>Строка, содержащая JWT-токен.</returns>
+        </member>
+        <member name="T:BooksExchanger.Services.Implementations.AuthorService.AuthorService">
+            <summary>
+            Сервис для работы с авторами.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.AuthorService.AuthorService.#ctor(BooksExchanger.Repositories.Interfaces.IAuthorRepository)">
+            <summary>
+            Инициализирует новый экземпляр сервиса авторов.
+            </summary>
+            <param name="authorRepository">Репозиторий авторов.</param>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.AuthorService.AuthorService.AddAuthor(System.String)">
+            <summary>
+            Добавляет автора.
+            </summary>
+            <param name="name">Имя автора.</param>
+            <returns>Идентификатор добавленного автора.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.AuthorService.AuthorService.UpdateAuthor(System.Int64,System.String)">
+            <summary>
+            Обновляет данные об авторе.
+            </summary>
+            <param name="id">Идентификатор автора.</param>
+            <param name="name">Новое имя автора.</param>
+            <returns>Идентификатор обновленного автора.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.AuthorService.AuthorService.GetAuthors">
+            <summary>
+            Получает список всех авторов.
+            </summary>
+            <returns>Коллекция авторов.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.AuthorService.AuthorService.SearchAuthors(System.String)">
+            <summary>
+            Поиск авторов по имени.
+            </summary>
+            <param name="name">Имя или его часть для поиска авторов.</param>
+            <returns>Коллекция авторов, соответствующих условию поиска.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.AuthorService.AuthorService.RemoveAuthor(System.Int64)">
+            <summary>
+            Удаляет автора по идентификатору.
+            </summary>
+            <param name="id">Идентификатор автора для удаления.</param>
+        </member>
+        <member name="T:BooksExchanger.Services.Implementations.BookService.BookService">
+            <summary>
+            Предоставляет сервис для работы с книгами.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.BookService.BookService.#ctor(BooksExchanger.Repositories.Interfaces.IBookRepository)">
+            <summary>
+            Инициализирует новый экземпляр сервиса <see cref="T:BooksExchanger.Services.Implementations.BookService.BookService"/>.
+            </summary>
+            <param name="bookRepository">Репозиторий книг, используемый сервисом.</param>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.BookService.BookService.AddBook(System.String,System.Int32,System.Collections.Generic.List{System.Int64})">
+            <summary>
+            Добавляет новую книгу.
+            </summary>
+            <param name="title">Название книги.</param>
+            <param name="genreId">Идентификатор жанра книги.</param>
+            <param name="authorIds">Список идентификаторов авторов книги.</param>
+            <returns>Идентификатор добавленной книги.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.BookService.BookService.UpdateBook(System.Int64,System.String,System.Int32,System.Collections.Generic.List{System.Int64})">
+            <summary>
+            Обновляет информацию о существующей книге.
+            </summary>
+            <param name="bookId">Идентификатор книги для обновления.</param>
+            <param name="title">Новое название книги.</param>
+            <param name="genreId">Идентификатор нового жанра книги.</param>
+            <param name="authorIds">Список идентификаторов авторов книги.</param>
+            <returns>Идентификатор обновленной книги.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.BookService.BookService.GetBooks(System.Nullable{System.Int64})">
+            <summary>
+            Получает список всех книг или книгу по её идентификатору.
+            </summary>
+            <param name="bookId">Необязательный идентификатор книги.</param>
+            <returns>Список книг.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.BookService.BookService.SearchBooks(System.String)">
+            <summary>
+            Ищет книги по началу названия.
+            </summary>
+            <param name="title">Начало названия книги для поиска.</param>
+            <returns>Перечисление книг, начинающихся с указанного названия.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.BookService.BookService.RemoveBook(System.Int64)">
+            <summary>
+            Удаляет книгу по её идентификатору.
+            </summary>
+            <param name="bookId">Идентификатор книги.</param>
+        </member>
+        <member name="T:BooksExchanger.Services.Implementations.ChatService.ChatService">
+            <summary>
+            Сервис для работы с чатами.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.ChatService.ChatService.#ctor(BooksExchanger.Repositories.Interfaces.IChatRepository)">
+            <summary>
+            Конструктор сервиса чатов.
+            </summary>
+            <param name="chatRepository">Репозиторий чатов.</param>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.ChatService.ChatService.GetChats(System.Int64)">
+            <summary>
+            Получает список всех чатов для указанного пользователя.
+            </summary>
+            <param name="userId">Идентификатор пользователя, чьи чаты необходимо получить.</param>
+            <returns>Коллекция чатов пользователя.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.ChatService.ChatService.GetChatWithMessages(System.Int64,System.Int64)">
+            <summary>
+            Получает детали чата вместе с сообщениями между текущим пользователем и другим указанным пользователем.
+            Создает новый чат, если таковой не существует.
+            </summary>
+            <param name="currentUserId">Идентификатор текущего пользователя.</param>
+            <param name="secondUserId">Идентификатор другого пользователя, с которым идет обмен сообщениями.</param>
+            <returns>Детали чата с сообщениями.</returns>
+        </member>
+        <member name="T:BooksExchanger.Services.Implementations.FeedbackService.FeedbackService">
+            <summary>
+            Сервис отзывов.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.FeedbackService.FeedbackService.#ctor(BooksExchanger.Repositories.Interfaces.IFeedbackRepository)">
+            <summary>
+            Конструктор.
+            </summary>
+            <param name="feedbackRepository">Хранилище отзывов.</param>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.FeedbackService.FeedbackService.CulcBookEstimation(BooksExchanger.Models.BookEstimation,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Вычисляет оценку книги.
+            </summary>
+            <param name="currentEstimaion">Текущая оценка книги.</param>
+            <param name="lastUserEstimation">Предыдущая оценка пользователя.</param>
+            <param name="newUserEstimation">Новая оценка пользователя.</param>
+            <returns>Обновленная оценка книги.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.FeedbackService.FeedbackService.AddOrEditFeedback(System.Guid,System.Int64,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Добавляет или обновляет отзыв.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <param name="authorId">Идентификатор автора отзыва.</param>
+            <param name="text">Текст отзыва.</param>
+            <param name="estimation">Оценка отзыва.</param>
+            <returns>Идентификатор добавленного или обновленного отзыва.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.FeedbackService.FeedbackService.GetFeedbacks(System.Guid)">
+            <summary>
+            Возвращает список отзывов для предложения.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <returns>Коллекция объектов отзывов.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.FeedbackService.FeedbackService.RemoveFeedback(System.Int64,System.Func{BooksExchanger.Models.Feedback,System.Boolean})">
+            <summary>
+            Удаляет отзыв.
+            </summary>
+            <param name="feedbackId">Идентификатор отзыва.</param>
+            <param name="permissionsCheker">Функция проверки прав доступа.</param>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.FeedbackService.FeedbackService.FilterOutUserFeedback(System.Collections.Generic.List{BooksExchanger.Models.Feedback},System.Int64)">
+            <summary>
+            Фильтрует отзыв пользователя из списка отзывов.
+            </summary>
+            <param name="feedbacks">Список отзывов.</param>
+            <param name="userId">Идентификатор пользователя.</param>
+            <returns>Отзыв пользователя или null, если не найден.</returns>
+        </member>
+        <member name="T:BooksExchanger.Services.Implementations.GenreService.GenreService">
+            <summary>
+            Предоставляет сервис для работы с жанрами.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.GenreService.GenreService.#ctor(BooksExchanger.Repositories.Interfaces.IGenreRepository)">
+            <summary>
+            Инициализирует новый экземпляр сервиса жанров.
+            </summary>
+            <param name="genreRepository">Репозиторий для работы с жанрами.</param>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.GenreService.GenreService.AddGenre(System.String)">
+            <summary>
+            Добавляет новый жанр.
+            </summary>
+            <param name="name">Название жанра.</param>
+            <returns>Идентификатор добавленного жанра.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.GenreService.GenreService.UpdateGenre(System.Int32,System.String)">
+            <summary>
+            Обновляет сведения о жанре.
+            </summary>
+            <param name="id">Идентификатор обновляемого жанра.</param>
+            <param name="name">Новое название жанра.</param>
+            <returns>Идентификатор обновленного жанра.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.GenreService.GenreService.GetGenres">
+            <summary>
+            Возвращает перечень всех жанров.
+            </summary>
+            <returns>Коллекцию жанров.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.GenreService.GenreService.RemoveGenre(System.Int32)">
+            <summary>
+            Ищет жанры, соответствующие заданному имени.
+            </summary>
+            <param name="name">Название жанра для поиска.</param>
+            <returns>Коллекцию найденных жанров.</returns>
+        </member>
+        <member name="T:BooksExchanger.Services.Implementations.OffersCollectorService.OffersCollectorService">
+            <summary>
+            Сервис офферов для модерации.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.OffersCollectorService.OffersCollectorService.#ctor(BooksExchanger.Services.Interfaces.IImageStorageService,BooksExchanger.Repositories.Interfaces.IOffersCollectorRepository)">
+            <summary>
+            Инициализирует новый экземпляр службы сбора предложений.
+            </summary>
+            <param name="imageStorageService">Служба хранения изображений.</param>
+            <param name="offersCollectorRepository">Репозиторий коллектора предложений.</param>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.OffersCollectorService.OffersCollectorService.CreateOffer(System.Int64,System.String,System.String,System.String,System.String,Microsoft.AspNetCore.Http.IFormFile,System.Nullable{System.Decimal})">
+            <summary>
+            Создает предложение об обмене книгой.
+            </summary>
+            <param name="userId">Идентификатор пользователя.</param>
+            <param name="title">Название книги.</param>
+            <param name="authors">Авторы книги.</param>
+            <param name="city">Город, в котором предлагается книга.</param>
+            <param name="description">Описание книги.</param>
+            <param name="image">Фотография обложки книги.</param>
+            <param name="price">Цена предложения.</param>
+            <returns>Идентификатор созданного предложения.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.OffersCollectorService.OffersCollectorService.RejectOffer(System.Guid,System.String)">
+            <summary>
+            Отклоняет предложение с указанием причины.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <param name="reason">Причина отклонения.</param>
+            <returns>Идентификатор отклоненного предложения.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.OffersCollectorService.OffersCollectorService.ApproveOfferAndGetId(System.Guid,System.Int64)">
+            <summary>
+            Подтверждает предложение и связывает его с идентификатором книги.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <param name="linkedBookId">Идентификатор связанной книги.</param>
+            <returns>Идентификатор подтвержденного предложения.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.OffersCollectorService.OffersCollectorService.RemoveOffer(System.Guid,System.Int64)">
+            <summary>
+            Удаляет предложение.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <param name="userId">Идентификатор пользователя, который удаляет предложение.</param>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.OffersCollectorService.OffersCollectorService.GetOffers(System.Collections.Generic.HashSet{BooksExchanger.Models.ModerationStatus},System.Nullable{System.Guid},System.Nullable{System.Int64})">
+            <summary>
+            Получает список предложений по заданным критериям.
+            </summary>
+            <param name="needStatuses">Статусы предложений, которые необходимо получить.</param>
+            <param name="offerId">Идентификатор конкретного предложения.</param>
+            <param name="userId">Идентификатор пользователя, чьи предложения требуется получить.</param>
+            <returns>Коллекция предложений, удовлетворяющих заданным критериям.</returns>
+        </member>
+        <member name="T:BooksExchanger.Services.Implementations.OfferService.OfferService">
+            <summary>
+            Сервис для работы с предложениями книг.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.OfferService.OfferService.#ctor(BooksExchanger.Repositories.Interfaces.IOfferRepository,BooksExchanger.Repositories.Interfaces.IGenreRepository)">
+            <summary>
+            Конструктор сервиса предложений.
+            </summary>
+            <param name="offerRepository">Репозиторий предложений.</param>
+            <param name="genreRepository">Репозиторий жанров.</param>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.OfferService.OfferService.GetOffer(System.Guid)">
+            <summary>
+            Получает предложение по идентификатору.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <returns>Объект предложения.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.OfferService.OfferService.IsOfferFavoriteForUser(System.Int64,System.Guid)">
+            <summary>
+            Проверяет, добавлено ли предложение в избранное у пользователя.
+            </summary>
+            <param name="userId">Идентификатор пользователя.</param>
+            <param name="offerId">Идентификатор предложения.</param>
+            <returns>True, если предложение в избранном у пользователя. Иначе false.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.OfferService.OfferService.GetOffers(System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Nullable{System.Int64})">
+            <summary>
+            Получает список предложений книг в соответствии с указанными фильтрами.
+            </summary>
+            <param name="genreId">Идентификатор жанра (опционально).</param>
+            <param name="city">Город (опционально).</param>
+            <param name="userId">Идентификатор пользователя, предложения которого нужно получить (опционально).</param>
+            <param name="notUserId">Идентификатор пользователя, предложения которого нужно исключить (опционально).</param>
+            <returns>Коллекция предложений книг.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.OfferService.OfferService.AddOfferToFavorite(System.Guid,System.Int64)">
+            <summary>
+            Добавляет предложение в избранное пользователя.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <param name="userId">Идентификатор пользователя.</param>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.OfferService.OfferService.RemoveOfferFromFavorite(System.Guid,System.Int64)">
+            <summary>
+            Удаляет предложение из избранного пользователя.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <param name="userId">Идентификатор пользователя.</param>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.OfferService.OfferService.RemoveOffer(System.Guid,System.Int64)">
+            <summary>
+            Удаляет предложение книги.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <param name="userId">Идентификатор пользователя, владельца предложения.</param>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.OfferService.OfferService.GetFavoriteOffers(System.Int64)">
+            <summary>
+            Получает список избранных предложений пользователя.
+            </summary>
+            <param name="userId">Идентификатор пользователя.</param>
+            <returns>Коллекция избранных предложений.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.OfferService.OfferService.GetOfferSelections(System.Nullable{System.Int64},System.String)">
+            <summary>
+            Получение подборок офферов.
+            </summary>
+            <param name="userId">id пользователя.</param>
+            <param name="city">Город.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.OfferService.OfferService.SearchOffersByTitle(System.String)">
+            <summary>
+            Поиск офферов по названию.
+            </summary>
+            <param name="title">Название оффера.</param>
+            <returns>Спискок офферов.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Implementations.OfferService.OfferService.SearchOffersByAuthor(System.String)">
+            <summary>
+            Поиск офферов по автору.
+            </summary>
+            <param name="author">Имя автора.</param>
+            <returns>Спискок офферов.</returns>
+        </member>
+        <member name="T:BooksExchanger.Services.Interfaces.IAuthorService">
+            <summary>
+            Интерфейс сервиса для работы с авторами.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IAuthorService.AddAuthor(System.String)">
+            <summary>
+            Добавляет нового автора.
+            </summary>
+            <param name="name">Имя автора.</param>
+            <returns>Идентификатор добавленного автора.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IAuthorService.UpdateAuthor(System.Int64,System.String)">
+            <summary>
+            Обновляет информацию об авторе.
+            </summary>
+            <param name="id">Идентификатор автора.</param>
+            <param name="name">Новое имя автора.</param>
+            <returns>Идентификатор обновленного автора.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IAuthorService.GetAuthors">
+            <summary>
+            Получает список всех авторов.
+            </summary>
+            <returns>Коллекция авторов.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IAuthorService.SearchAuthors(System.String)">
+            <summary>
+            Поиск авторов по имени.
+            </summary>
+            <param name="name">Имя автора для поиска.</param>
+            <returns>Коллекция авторов, чьи имена соответствуют заданному условию.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IAuthorService.RemoveAuthor(System.Int64)">
+            <summary>
+            Удаляет автора по идентификатору.
+            </summary>
+            <param name="id">Идентификатор автора для удаления.</param>
+        </member>
+        <member name="T:BooksExchanger.Services.Interfaces.IChatService">
+            <summary>
+            Определяет интерфейс для службы чата, позволяющей получать доступ к чатам и сообщениям.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IChatService.GetChats(System.Int64)">
+            <summary>
+            Получает все чаты, ассоциированные с пользователем.
+            </summary>
+            <param name="userId">Идентификатор пользователя, чьи чаты необходимо получить.</param>
+            <returns>Коллекция чатов указанного пользователя.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IChatService.GetChatWithMessages(System.Int64,System.Int64)">
+            <summary>
+            Получает чат между двумя пользователями вместе со всеми сообщениями.
+            </summary>
+            <param name="currentUserId">Идентификатор текущего пользователя.</param>
+            <param name="secondUserId">Идентификатор второго пользователя, с которым ведется диалог.</param>
+            <returns>Объект чата, содержащий информацию о чате и ассоциированные с ним сообщения.</returns>
+        </member>
+        <member name="T:BooksExchanger.Services.Interfaces.IFeedbackService">
+            <summary>
+            Интерфейс сервиса для работы с отзывами.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IFeedbackService.AddOrEditFeedback(System.Guid,System.Int64,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Добавляет или редактирует отзыв к предложению.
+            </summary>
+            <param name="offerId">Идентификатор предложения, для которого добавляется отзыв.</param>
+            <param name="authorId">Идентификатор автора отзыва.</param>
+            <param name="text">Текст отзыва (необязательно).</param>
+            <param name="estimation">Оценка (необязательно).</param>
+            <returns>Идентификатор созданного или обновленного отзыва.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IFeedbackService.GetFeedbacks(System.Guid)">
+            <summary>
+            Получает отзывы для конкретного предложения.
+            </summary>
+            <param name="offerId">Идентификатор предложения, для которого запрашиваются отзывы.</param>
+            <returns>Коллекцию отзывов для указанного предложения.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IFeedbackService.RemoveFeedback(System.Int64,System.Func{BooksExchanger.Models.Feedback,System.Boolean})">
+            <summary>
+            Удаляет отзыв.
+            </summary>
+            <param name="feedbackId">Идентификатор отзыва для удаления.</param>
+            <param name="permissionsCheker">Функция проверки разрешения на удаление отзыва для пользователя.</param>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IFeedbackService.FilterOutUserFeedback(System.Collections.Generic.List{BooksExchanger.Models.Feedback},System.Int64)">
+            <summary>
+            Отфильтровывает отзывы пользователя из списка всех отзывов.
+            </summary>
+            <param name="feedbacks">Список отзывов, из которого необходимо отфильтровать.</param>
+            <param name="userId">Идентификатор пользователя, отзывы которого необходимо отфильтровать.</param>
+            <returns>Отзыв пользователя, если он есть в списке.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IGenreService.AddGenre(System.String)">
+            <summary>
+            Добавляет новый жанр.
+            </summary>
+            <param name="name">Название жанра.</param>
+            <returns>Идентификатор добавленного жанра.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IGenreService.UpdateGenre(System.Int32,System.String)">
+            <summary>
+            Обновляет информацию по существующему жанру.
+            </summary>
+            <param name="id">Идентификатор жанра.</param>
+            <param name="name">Новое название жанра.</param>
+            <returns>Идентификатор обновленного жанра.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IGenreService.GetGenres">
+            <summary>
+            Возвращает список всех жанров.
+            </summary>
+            <returns>Коллекцию всех жанров.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IGenreService.SearchGenres(System.String)">
+            <summary>
+            Ищет жанры по названию.
+            </summary>
+            <param name="name">Название жанра для поиска.</param>
+            <returns>Коллекцию жанров, соответствующих заданному названию.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IGenreService.RemoveGenre(System.Int32)">
+            <summary>
+            Удаляет жанр по его идентификатору.
+            </summary>
+            <param name="id">Идентификатор удаляемого жанра.</param>
+        </member>
+        <member name="T:BooksExchanger.Services.Interfaces.IImageStorageService">
+            <summary>
+            Определяет интерфейс для службы хранения изображений, позволяющей загружать изображения и получать ссылки на них.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IImageStorageService.UploadImageAndGetLink(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Загружает изображение и возвращает ссылку на загруженное изображение.
+            </summary>
+            <param name="image">Файл изображения для загрузки.</param>
+            <returns>Задача, результатом которой является строка, содержащая ссылку на загруженное изображение.</returns>
+        </member>
+        <member name="T:BooksExchanger.Services.Interfaces.IOffersCollectorService">
+            <summary>
+            Интерфейс сервиса для управления предложениями книг.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IOffersCollectorService.CreateOffer(System.Int64,System.String,System.String,System.String,System.String,Microsoft.AspNetCore.Http.IFormFile,System.Nullable{System.Decimal})">
+            <summary>
+            Создает новое предложение книги.
+            </summary>
+            <param name="userId">Идентификатор пользователя, создающего предложение.</param>
+            <param name="title">Название книги.</param>
+            <param name="authors">Авторы книги.</param>
+            <param name="city">Город, в котором находится книга.</param>
+            <param name="description">Описание книги (необязательно).</param>
+            <param name="image">Изображение обложки книги (необязательно).</param>
+            <param name="price">Цена книги (необязательно).</param>
+            <returns>Идентификатор созданного предложения.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IOffersCollectorService.RejectOffer(System.Guid,System.String)">
+            <summary>
+            Отклоняет предложение книги по указанной причине.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <param name="reason">Причина отклонения предложения.</param>
+            <returns>Идентификатор отклоненного предложения.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IOffersCollectorService.ApproveOfferAndGetId(System.Guid,System.Int64)">
+            <summary>
+            Одобряет предложение книги и связывает его с существующей книгой.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <param name="linkedBookId">Идентификатор книги, с которой будет связано предложение.</param>
+            <returns>Идентификатор подтвержденного предложения.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IOffersCollectorService.RemoveOffer(System.Guid,System.Int64)">
+            <summary>
+            Удаляет предложение книги.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <param name="userId">Идентификатор пользователя, который является владельцем предложения.</param>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IOffersCollectorService.GetOffers(System.Collections.Generic.HashSet{BooksExchanger.Models.ModerationStatus},System.Nullable{System.Guid},System.Nullable{System.Int64})">
+            <summary>
+            Получает предложения книг в соответствии с указанными критериями.
+            </summary>
+            <param name="needStatuses">Набор статусов модерации, по которым выполняется фильтрация предложений.</param>
+            <param name="offerId">Идентификатор конкретного предложения (необязательно).</param>
+            <param name="userId">Идентификатор пользователя, чьи предложения нужно получить (необязательно).</param>
+            <returns>Коллекция предложений книг.</returns>
+        </member>
+        <member name="T:BooksExchanger.Services.Interfaces.IOfferService">
+            <summary>
+            Определяет интерфейс для службы управления предложениями обмена книгами.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IOfferService.GetOffer(System.Guid)">
+            <summary>
+            Получает информацию о предложении по его идентификатору.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <returns>Данные предложения.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IOfferService.IsOfferFavoriteForUser(System.Int64,System.Guid)">
+            <summary>
+            Проверяет, размечено ли предложение как избранное у пользователя.
+            </summary>
+            <param name="userId">Идентификатор пользователя.</param>
+            <param name="offerId">Идентификатор предложения.</param>
+            <returns>true, если предложение находится в избранных у пользователя; иначе false.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IOfferService.GetOffers(System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Nullable{System.Int64})">
+            <summary>
+            Получает список предложений на основе заданных критериев.
+            </summary>
+            <param name="genreId">Идентификатор жанра.</param>
+            <param name="city">Город.</param>
+            <param name="userId">Идентификатор пользователя, предложения которого требуется исключить.</param>
+            <param name="notUserId">Идентификатор пользователя, чьи предложения требуется исключить из поиска.</param>
+            <returns>Коллекция подходящих предложений.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IOfferService.AddOfferToFavorite(System.Guid,System.Int64)">
+            <summary>
+            Добавляет предложение в избранное пользователя.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <param name="userId">Идентификатор пользователя.</param>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IOfferService.RemoveOfferFromFavorite(System.Guid,System.Int64)">
+            <summary>
+            Удаляет предложение из избранных у пользователя.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <param name="userId">Идентификатор пользователя.</param>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IOfferService.RemoveOffer(System.Guid,System.Int64)">
+            <summary>
+            Удаляет предложение обмена.
+            </summary>
+            <param name="offerId">Идентификатор предложения.</param>
+            <param name="userId">Идентификатор пользователя, совершающего удаление.</param>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IOfferService.GetFavoriteOffers(System.Int64)">
+            <summary>
+            Получает список избранных предложений пользователя.
+            </summary>
+            <param name="userId">Идентификатор пользователя.</param>
+            <returns>Коллекция предложений, помеченных как избранное у пользователя.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IOfferService.GetOfferSelections(System.Nullable{System.Int64},System.String)">
+            <summary>
+            Получает список рекомендаций для предложений на основе предпочтений пользователя и его местоположения.
+            </summary>
+            <param name="userId">Идентификатор пользователя.</param>
+            <param name="city">Город пользователя.</param>
+            <returns>Список рекомендаций для предложений.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IOfferService.SearchOffersByTitle(System.String)">
+            <summary>
+            Ищет предложения по названию книги.
+            </summary>
+            <param name="title">Название книги.</param>
+            <returns>Список предложений, чьи названия соответствуют запросу.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IOfferService.SearchOffersByAuthor(System.String)">
+            <summary>
+            Ищет предложения по автору книги.
+            </summary>
+            <param name="author">Автор книги.</param>
+            <returns>Список предложений, чьи авторы соответствуют запросу.</returns>
+        </member>
+        <member name="T:BooksExchanger.Services.Interfaces.ISearchService">
+            <summary>
+            Определяет интерфейс сервиса для поиска предложений.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.ISearchService.SearchOffersByTitle(System.String)">
+            <summary>
+            Ищет предложения по названию книги.
+            </summary>
+            <param name="title">Название книги.</param>
+            <returns>Коллекцию предложений, соответствующих заданному названию книги.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.ISearchService.SearchOffersByAuthor(System.String)">
+            <summary>
+            Ищет предложения по автору книги.
+            </summary>
+            <param name="author">Имя автора книги.</param>
+            <returns>Коллекцию предложений, соответствующих указанному автору.</returns>
+        </member>
+        <member name="T:BooksExchanger.Services.Interfaces.IUserService">
+            <summary>
+            Интерфейс сервиса для работы с пользовательскими данными.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IUserService.GetAuthToken(System.String,System.String)">
+            <summary>
+            Получает токен аутентификации для пользователя.
+            </summary>
+            <param name="email">Электронная почта пользователя.</param>
+            <param name="password">Пароль пользователя.</param>
+            <returns>Строка токена аутентификации.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IUserService.RegisterUser(System.String,System.String,System.String)">
+            <summary>
+            Регистрирует нового пользователя и возвращает токен аутентификации.
+            </summary>
+            <param name="name">Имя пользователя.</param>
+            <param name="email">Электронная почта пользователя.</param>
+            <param name="password">Пароль пользователя.</param>
+            <returns>Строка токена аутентификации для регистрации.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IUserService.IsUserRegistered(System.String)">
+            <summary>
+            Проверяет, зарегистрирован ли пользователь с указанной электронной почтой.
+            </summary>
+            <param name="email">Электронная почта для проверки.</param>
+            <returns>True, если пользователь с такой электронной почтой уже зарегистрирован; иначе false.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IUserService.IsUserExist(System.Int64)">
+            <summary>
+            Проверяет, существует ли пользователь с указанным идентификатором.
+            </summary>
+            <param name="userId">Идентификатор пользователя.</param>
+            <returns>True, если пользователь существует; иначе false.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IUserService.SetAdmin(System.String)">
+            <summary>
+            Назначает роль администратора пользователю по его электронной почте.
+            </summary>
+            <param name="email">Электронная почта пользователя.</param>
+        </member>
+        <member name="T:BooksExchanger.Services.Interfaces.IVerificationCodeService">
+            <summary>
+            Определяет интерфейс сервиса для работы с кодами верификации пользователей.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IVerificationCodeService.VerifyUser(System.String,System.String)">
+            <summary>
+            Проверяет пользователя, используя адрес электронной почты и код верификации.
+            </summary>
+            <param name="userEmail">Адрес электронной почты пользователя.</param>
+            <param name="verificationCode">Код верификации.</param>
+            <returns>Краткую информацию о пользователе, если верификация прошла успешно.</returns>
+        </member>
+        <member name="M:BooksExchanger.Services.Interfaces.IVerificationCodeService.SendCodeAndRememberUser(BooksExchanger.Models.ShortUserInfo)">
+            <summary>
+            Отправляет код верификации пользователю и запоминает информацию о нем.
+            </summary>
+            <param name="userInfo">Краткая информация о пользователе.</param>
+        </member>
+        <member name="T:BooksExchanger.VerificationCodesManager.Exceptions.FailSendCodeException">
+            <summary>
+            Не удалось отправить код подтверждения.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.VerificationCodesManager.Exceptions.FailSendCodeException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.VerificationCodesManager.Exceptions.FailSendCodeException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.VerificationCodesManager.Exceptions.FailSendCodeException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.VerificationCodesManager.Exceptions.FailSendCodeException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.VerificationCodesManager.Exceptions.InvalidVerificationCodeException">
+            <summary>
+            Неверный код подтверждения.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.VerificationCodesManager.Exceptions.InvalidVerificationCodeException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.VerificationCodesManager.Exceptions.InvalidVerificationCodeException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.VerificationCodesManager.Exceptions.InvalidVerificationCodeException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.VerificationCodesManager.Exceptions.UserAlreadyWaitConfirmationException">
+            <summary>
+            Пользователь уже ожидает подтверждения.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.VerificationCodesManager.Exceptions.UserAlreadyWaitConfirmationException.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.VerificationCodesManager.Exceptions.UserAlreadyWaitConfirmationException.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.VerificationCodesManager.Exceptions.UserAlreadyWaitConfirmationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.VerificationCodesManager.CodeWithDetails">
+            <summary>
+            Содержит информацию о коде подтверждения с деталями пользователя.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.VerificationCodesManager.CodeWithDetails.User">
+            <summary>
+            Пользователь, связанный с кодом подтверждения.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.VerificationCodesManager.CodeWithDetails.VerificationCode">
+            <summary>
+            Код подтверждения.
+            </summary>
+        </member>
+        <member name="F:BooksExchanger.VerificationCodesManager.CodeWithDetails._timeOfCreation">
+            <summary>
+            Время создания кода подтверждения.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.VerificationCodesManager.CodeWithDetails.#ctor(BooksExchanger.Models.ShortUserInfo,System.String)">
+            <summary>
+            Конструктор класса CodeWithDetails.
+            </summary>
+            <param name="user">Информация о пользователе.</param>
+            <param name="verificationCode">Код подтверждения.</param>
+        </member>
+        <member name="M:BooksExchanger.VerificationCodesManager.CodeWithDetails.IsEqualsVerificationCode(System.String)">
+            <summary>
+            Проверяет соответствие указанного кода сохраненному коду подтверждения.
+            </summary>
+            <param name="code">Код для проверки.</param>
+            <returns>true, если указанный код совпадает с кодом подтверждения; иначе false.</returns>
+        </member>
+        <member name="M:BooksExchanger.VerificationCodesManager.CodeWithDetails.IsDurationOfExistsOverdue(System.Int32)">
+            <summary>
+            Проверяет, просрочено ли время жизни кода подтверждения.
+            </summary>
+            <param name="lifeTimeMinutes">Время жизни кода подтверждения в минутах.</param>
+            <returns>true, если время жизни кода подтверждения истекло; иначе false.</returns>
+        </member>
+        <member name="T:BooksExchanger.VerificationCodesManager.EmailParams">
+            <summary>
+            Параметры письма.
+            </summary>
+            <param name="EmailSenderHeader">Заголовок отпарвителя.</param>
+            <param name="EmailHeader">Заголовок письма.</param>
+            <param name="MessageBody">Текст письма.</param>
+        </member>
+        <member name="M:BooksExchanger.VerificationCodesManager.EmailParams.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Параметры письма.
+            </summary>
+            <param name="EmailSenderHeader">Заголовок отпарвителя.</param>
+            <param name="EmailHeader">Заголовок письма.</param>
+            <param name="MessageBody">Текст письма.</param>
+        </member>
+        <member name="P:BooksExchanger.VerificationCodesManager.EmailParams.EmailSenderHeader">
+            <summary>Заголовок отпарвителя.</summary>
+        </member>
+        <member name="P:BooksExchanger.VerificationCodesManager.EmailParams.EmailHeader">
+            <summary>Заголовок письма.</summary>
+        </member>
+        <member name="P:BooksExchanger.VerificationCodesManager.EmailParams.MessageBody">
+            <summary>Текст письма.</summary>
+        </member>
+        <member name="T:BooksExchanger.VerificationCodesManager.SmtpGmailSettings">
+            <summary>
+            Настройки для отправки письма.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.VerificationCodesManager.SmtpGmailSettings.SmtpGmailString">
+            <summary>
+            Строка для отправки письма.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.VerificationCodesManager.SmtpGmailSettings.SmtpGmailPort">
+            <summary>
+            Порт для отправки письма.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.VerificationCodesManager.SmtpGmailSettings.GmailKey">
+            <summary>
+            Ключ для отправки письма.
+            </summary>
+        </member>
+        <member name="P:BooksExchanger.VerificationCodesManager.SmtpGmailSettings.EmailForSmtp">
+            <summary>
+            Адрес электронной почты.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.VerificationCodesManager.SmtpGmailSettings.BuildDefault">
+            <summary>
+            Билдер настроек.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:BooksExchanger.VerificationCodesManager.VerificationCodeService">
+            <summary>
+            Сервис для кодов подтверждения.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.VerificationCodesManager.VerificationCodeService.#ctor(System.Int32,BooksExchanger.VerificationCodesManager.EmailParams)">
+            <summary>
+            Инициализирует новый экземпляр сервиса управления верификационными кодами.
+            </summary>
+            <param name="codesLifeDurationMinutes">Время жизни кода подтверждения в минутах.</param>
+            <param name="emailParams">Параметры отправляемого электронного письма.</param>
+        </member>
+        <member name="M:BooksExchanger.VerificationCodesManager.VerificationCodeService.SendCodeAndRememberUser(BooksExchanger.Models.ShortUserInfo)">
+            <summary>
+            Отправляет код подтверждения на электронную почту пользователя и запоминает его данные.
+            </summary>
+            <param name="userInfo">Краткая информация о пользователе.</param>
+        </member>
+        <member name="M:BooksExchanger.VerificationCodesManager.VerificationCodeService.VerifyUser(System.String,System.String)">
+            <summary>
+            Проверяет верификационный код, отправленный пользователем, и возвращает его краткую информацию, если код верный.
+            </summary>
+            <param name="userEmail">Электронная почта пользователя.</param>
+            <param name="verificationCode">Верификационный код.</param>
+            <returns>Краткая информация о пользователе.</returns>
+        </member>
+        <member name="M:BooksExchanger.VerificationCodesManager.VerificationCodeService.UpdateVerificationCodes(System.Object)">
+            <summary>
+            Очищает словарь от устаревших верификационных кодов.
+            </summary>
+            <param name="obj">Не используется.</param>
+        </member>
+        <member name="T:BooksExchanger.MetanitHub.CustomUserIdProvider">
+            <summary>
+            Класс пользователя.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.MetanitHub.CustomUserIdProvider.GetUserId(Microsoft.AspNetCore.SignalR.HubConnectionContext)">
+            <summary>
+            Получает id пользователя.
+            </summary>
+            <param name="connection">Подкючение.</param>
+            <returns>Id пользователя.</returns>
+        </member>
+        <member name="T:BooksExchanger.MetanitHub.ChatHub">
+            <summary>
+            Хаб чата.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.MetanitHub.ChatHub.#ctor(BooksExchanger.Repositories.Interfaces.IUserRepository,BooksExchanger.Repositories.Interfaces.IChatRepository)">
+            <summary>
+            Конструктор.
+            </summary>
+            <param name="userRepository">Хранилище пользователей.</param>
+            <param name="chatRepository">Хранилище чатов.</param>
+        </member>
+        <member name="M:BooksExchanger.MetanitHub.ChatHub.OnConnectedAsync">
+            <summary>
+            Обработчик подключения нового клиента.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.MetanitHub.ChatHub.Send(BooksExchanger.Models.SendMessage)">
+            <summary>
+            Отправляет сообщение.
+            </summary>
+        </member>
+        <member name="T:BooksExchanger.ImageStorageService">
+            <summary>
+            Сервис для работы с хранилищем изображений на Яндекс.Диске.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.ImageStorageService.#cctor">
+            <summary>
+            Инициализирует статический экземпляр сервиса Yandex.Disk.
+            </summary>
+        </member>
+        <member name="M:BooksExchanger.ImageStorageService.UploadImageAndGetLink(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Загружает изображение и возвращает ссылку на него.
+            </summary>
+            <param name="image">Файл изображения.</param>
+            <returns>Ссылку на загруженное изображение.</returns>
         </member>
     </members>
 </doc>

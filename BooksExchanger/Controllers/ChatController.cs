@@ -1,13 +1,11 @@
 using System.Net;
-using BooksExchanger.Context;
+
+using Microsoft.AspNetCore.Mvc;
+
 using BooksExchanger.Controllers.Specs;
 using BooksExchanger.Controllers.Specs.Chats;
 using BooksExchanger.Models;
-using BooksExchanger.Repositories.Interfaces;
-using BooksExchanger.Services.Implementations.ChatService;
 using BooksExchanger.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BooksExchanger.Controllers;
 
@@ -22,6 +20,11 @@ public class ChatController : ControllerBase
     private IUserService _userService;
     private ResponseMapper _responseMapper;
 
+    /// <summary>
+    /// Конструктор контроллера.
+    /// </summary>
+    /// <param name="chatService">Сервис чатов.</param>
+    /// <param name="userService">Сервис пользователей.</param>
     public ChatController(IChatService chatService, IUserService userService)
     {
         _chatService = chatService;

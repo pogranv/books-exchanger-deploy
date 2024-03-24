@@ -1,23 +1,38 @@
+using Microsoft.EntityFrameworkCore;
+
+using Npgsql;
+
 using BooksExchanger.Context;
-using BooksExchanger.Controllers.Specs.Genres;
 using BooksExchanger.Models;
 using BooksExchanger.Repositories.Exeptions;
 using BooksExchanger.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using Npgsql;
+
 using Genre = BooksExchanger.Entities.Genre;
 
 namespace BooksExchanger.Repositories.Implementations;
 
 
+/// <summary>
+/// Репозиторий для управления жанрами в базе данных.
+/// </summary>
 public class GenreRepository : IGenreRepository
 {
     private ResponseMapper _responseMapper;
 
+    /// <summary>
+    /// Инициализирует новый экземпляр класса <see cref="GenreRepository"/>.
+    /// </summary>
     public GenreRepository()
     {
         _responseMapper = new();
     }
+    
+    /// <summary>
+    /// Вставляет новый жанр в базу данных.
+    /// </summary>
+    /// <param name="name">Название жанра для вставки.</param>
+    /// <returns>Сгенерированный идентификатор для вставленного жанра.</returns>
+    /// <exception cref="GenreAlreadyExistsException">Исключение, возникающее, когда жанр с таким именем уже существует.</exception>
     public int InsertGenre(string name)
     {
         try
@@ -44,6 +59,14 @@ public class GenreRepository : IGenreRepository
         }
     }
 
+    /// <summary>
+    /// Обновляет название существующего жанра в базе данных.
+    /// </summary>
+    /// <param name="id">Идентификатор жанра для обновления.</param>
+    /// <param name="name">Новое название для жанра.</param>
+    /// <returns>Идентификатор обновленного жанра.</returns>
+    /// <exception cref="GenreNotFoundException">Исключение, возникающее, когда жанр с указанным идентификатором не существует.</exception>
+    /// <exception cref="GenreAlreadyExistsException">Исключение, возникающее, когда жанр с обновленным названием уже существует.</exception>
     public int UpdateGenre(int id, string name)
     {
         try
@@ -75,6 +98,10 @@ public class GenreRepository : IGenreRepository
         }
     }
 
+    /// <summary>
+    /// Извлекает коллекцию всех жанров из базы данных.
+    /// </summary>
+    /// <returns>Коллекция <see cref="Models.Genre"/>.</returns>
     public IEnumerable<Models.Genre> GetGenres()
     {
         using (DbCtx db = new DbCtx())
@@ -83,6 +110,11 @@ public class GenreRepository : IGenreRepository
         }
     }
 
+    // <summary>
+    /// Извлекает коллекцию жанров, соответствующих указанному фильтру.
+    /// </summary>
+    /// <param name="filter">Функция фильтрации названий жанров.</param>
+    /// <returns>Коллекция <see cref="Models.Genre"/>.</returns>
     public IEnumerable<Models.Genre> GetGenres(Func<string, bool> filter)
     {
         using (DbCtx db = new DbCtx())
@@ -91,6 +123,12 @@ public class GenreRepository : IGenreRepository
         }
     }
 
+    /// <summary>
+    /// Удаляет жанр из базы данных.
+    /// </summary>
+    /// <param name="id">Идентификатор удаляемого жанра.</param>
+    /// <exception cref="GenreNotFoundException">Исключение, возникающее, когда жанр с указанным идентификатором не существует.</exception>
+    /// <exception cref="RemoveGenreNotAllowedException">Исключение, возникающее, когда невозможно удалить жанр, поскольку к нему привязаны книги.</exception>
     public void RemoveGenre(int id)
     {
         try

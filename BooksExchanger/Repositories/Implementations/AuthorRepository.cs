@@ -1,12 +1,12 @@
-using System.Net;
+using Npgsql;
+
+using Microsoft.EntityFrameworkCore;
+
 using BooksExchanger.Context;
-using BooksExchanger.Controllers.Specs;
-using BooksExchanger.Controllers.Specs.Authors;
 using BooksExchanger.Models;
 using BooksExchanger.Repositories.Exeptions;
 using BooksExchanger.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using Npgsql;
+
 using Author = BooksExchanger.Entities.Author;
 
 namespace BooksExchanger.Repositories.Implementations;
@@ -18,6 +18,9 @@ public class AuthorRepository : IAuthorRepository
 {
     private ResponseMapper _responseMapper;
 
+    /// <summary>
+    /// Конструктор хранилища авторов.
+    /// </summary>
     public AuthorRepository()
     {
         _responseMapper = new();

@@ -26,6 +26,10 @@ public class GenresController : ControllerBase
     private IGenreService _genreService;
     private ResponseMapper _responseMapper;
 
+    /// <summary>
+    /// Конструктор контроллера.
+    /// </summary>
+    /// <param name="genreService">Сервис жанров.</param>
     public GenresController(IGenreService genreService)
     {
         _genreService = genreService;

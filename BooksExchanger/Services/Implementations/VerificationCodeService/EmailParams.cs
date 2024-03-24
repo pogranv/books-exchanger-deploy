@@ -1,7 +1,11 @@
-﻿using System;
+﻿namespace BooksExchanger.VerificationCodesManager;
 
-namespace Obshajka.VerificationCodesManager
-{
-	public sealed record EmailParams(string EmailSenderHeader, string EmailHeader, string MessageBody);
-}
+/// <summary>
+/// Параметры письма.
+/// </summary>
+/// <param name="EmailSenderHeader">Заголовок отпарвителя.</param>
+/// <param name="EmailHeader">Заголовок письма.</param>
+/// <param name="MessageBody">Текст письма.</param>
+public sealed record EmailParams(string EmailSenderHeader, string EmailHeader, string MessageBody);
+
 

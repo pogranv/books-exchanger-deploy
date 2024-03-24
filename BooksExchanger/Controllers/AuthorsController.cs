@@ -20,6 +20,10 @@ public class AuthorsController : ControllerBase
     private IAuthorService _authorService;
     private ResponseMapper _responseMapper;
 
+    /// <summary>
+    /// Конструктор контроллера.
+    /// </summary>
+    /// <param name="authorService">Сервис авторов.</param>
     public AuthorsController(IAuthorService authorService)
     {
         _authorService = authorService;

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace BooksExchanger.Entities;
+﻿namespace BooksExchanger.Entities;
 
 /// <summary>
 /// Объект оффера в БД.

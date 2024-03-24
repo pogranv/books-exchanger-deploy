@@ -1,6 +1,3 @@
-using BooksExchanger.Entities;
-using Obshajka.VerificationCodesManager;
-
 namespace BooksExchanger.Models;
 
 /// <summary>

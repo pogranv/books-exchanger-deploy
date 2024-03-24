@@ -24,6 +24,10 @@ public class FeedbacksConstroller : ControllerBase
     private IFeedbackService _feedbackService;
     private ResponseMapper _responseMapper;
 
+    /// <summary>
+    /// Конструктор контроллера.
+    /// </summary>
+    /// <param name="feedbackService">Сервис отзывов.</param>
     public FeedbacksConstroller(IFeedbackService feedbackService)
     {
         _feedbackService = feedbackService;

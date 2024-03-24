@@ -1,13 +1,10 @@
 using System.Net;
-using BooksExchanger.Context;
-using BooksExchanger.Controllers.Specs;
+
+using Microsoft.AspNetCore.Mvc;
+
 using BooksExchanger.Controllers.Specs.Offers;
 using BooksExchanger.Models;
-using BooksExchanger.Services.Implementations.OfferService;
 using BooksExchanger.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Offer = BooksExchanger.Entities.Offer;
 
 namespace BooksExchanger.Controllers;
 
@@ -21,6 +18,10 @@ public class SearchController : ControllerBase
     private IOfferService _offerService;
     private ResponseMapper _responseMapper;
 
+    /// <summary>
+    /// Конструктор контроллера.
+    /// </summary>
+    /// <param name="offerService">Сервис офферов.</param>
     public SearchController(IOfferService offerService)
     {
         _offerService = offerService;

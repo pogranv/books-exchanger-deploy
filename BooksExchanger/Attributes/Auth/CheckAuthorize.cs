@@ -1,18 +1,19 @@
-using BooksExchanger.Controllers.Specs;
-using BooksExchanger.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+
+using BooksExchanger.Controllers.Specs;
+using BooksExchanger.Models;
 
 namespace BooksExchanger.Attributes.Auth;
 
 /// <summary>
-/// Атрибут авторизации с правами админа.
+/// Атрибут проверки авторизации.
 /// </summary>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
 public class CheckAuthorizeAttribute : Attribute, IAuthorizationFilter
 {
     /// <summary>
-    /// Проверка авторизации админа.
+    /// Проверка авторизации.
     /// </summary>
     /// <param name="context"></param>
     public void OnAuthorization(AuthorizationFilterContext context)

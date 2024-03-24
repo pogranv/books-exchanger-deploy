@@ -1,9 +1,11 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
-using BooksExchanger.Models;
-using BooksExchanger.Settings;
+
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+
+using BooksExchanger.Models;
+using BooksExchanger.Settings;
 
 namespace BooksExchanger.Middlewares;
 

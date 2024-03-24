@@ -4,12 +4,18 @@ using YandexDisk.Client.Protocol;
 
 namespace BooksExchanger;
 
+/// <summary>
+/// Сервис для работы с хранилищем изображений на Яндекс.Диске.
+/// </summary>
 public class ImageStorageService : IImageStorageService
 {
     private static DiskHttpApi s_api;
 
     private const string _folderName = "Obshajka_Advertisement_Images"; // TODO: change
 
+    /// <summary>
+    /// Инициализирует статический экземпляр сервиса Yandex.Disk.
+    /// </summary>
     static ImageStorageService()
     {
         var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("YandexDiskSettings");
@@ -20,6 +26,11 @@ public class ImageStorageService : IImageStorageService
         CreateImagesDirectoryIfNotExists();
     }
     
+    /// <summary>
+    /// Загружает изображение и возвращает ссылку на него.
+    /// </summary>
+    /// <param name="image">Файл изображения.</param>
+    /// <returns>Ссылку на загруженное изображение.</returns>
     public async Task<string> UploadImageAndGetLink(IFormFile image)
     {
         string pathToImage = MakePathToImage(Path.GetExtension(image.FileName));

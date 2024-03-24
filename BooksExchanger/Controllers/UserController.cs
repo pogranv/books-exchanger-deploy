@@ -1,28 +1,19 @@
-using System.IdentityModel.Tokens.Jwt;
 using System.Net;
-using System.Security.Claims;
-using System.Text;
-using BooksExchanger.Context;
-using BooksExchanger.Controllers.Specs;
-using BooksExchanger.Controllers.Specs.User;
-using BooksExchanger.Entities;
-using BooksExchanger.Models;
-using BooksExchanger.Models.Requests;
-using BooksExchanger.Services.Implementations;
-using BooksExchanger.Services.Implementations.UserService.Exceptions;
-using BooksExchanger.Services.Interfaces;
-using BooksExchanger.Settings;
-using BooksExchanger.VerificationCodesManager;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using Obshajka.VerificationCodesManager;
-using Obshajka.VerificationCodesManager.Exceptions;
-
-namespace BooksExchanger.Controllers;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+
+using BooksExchanger.Context;
+using BooksExchanger.Controllers.Specs;
+using BooksExchanger.Controllers.Specs.User;
+using BooksExchanger.Models;
+using BooksExchanger.Models.Requests;
+using BooksExchanger.Services.Implementations.UserService.Exceptions;
+using BooksExchanger.Services.Interfaces;
+using BooksExchanger.VerificationCodesManager;
+using BooksExchanger.VerificationCodesManager.Exceptions;
+
+namespace BooksExchanger.Controllers;
 
 /// <summary>
 /// Контроллер пользователей.
@@ -34,12 +25,19 @@ public class UserController : ControllerBase
     private static readonly IVerificationCodeService s_verificationCodeService;
     private IUserService _userService;
 
+    /// <summary>
+    /// Статический конструктор контроллера.
+    /// </summary>
     static UserController()
     {
         var emailParams = new EmailParams("Books Exhcanger", "Books Exhcanger", "Здравствуйте! Ваш код подтверждения для приложения Books Exhcanger: ");
         s_verificationCodeService = new VerificationCodeService(5, emailParams);
     }
 
+    /// <summary>
+    /// Конструктор контроллера.
+    /// </summary>
+    /// <param name="userService">Сервис пользователей.</param>
     public UserController(IUserService userService)
     {
         _userService = userService;
@@ -175,6 +173,10 @@ public class UserController : ControllerBase
         }
     }
     
+    /// <summary>
+    /// Проверяет авторизацию пользователя.
+    /// </summary>
+    /// <returns></returns>
     [HttpGet("check")]
     [Attributes.Auth.CheckAuthorize]
     public IActionResult CheckToken()

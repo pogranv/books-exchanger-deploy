@@ -16,11 +16,20 @@ public class OfferRepository : IOfferRepository
 {
     private ResponseMapper _responseMapper;
 
+    /// <summary>
+    /// Инициализирует новый экземпляр класса <see cref="OfferRepository"/>.
+    /// </summary>
     public OfferRepository()
     {
         _responseMapper = new();
     }
 
+    /// <summary>
+    /// Получает предложение по его уникальному идентификатору.
+    /// </summary>
+    /// <param name="offerId">Уникальный идентификатор предложения.</param>
+    /// <returns>Найденное предложение.</returns>
+    /// <exception cref="OfferNotFoundException">Исключение выбрасывается, если предложение с указанным ID не найдено.</exception>
     public Offer GetOffer(Guid offerId)
     {
         using (DbCtx db = new DbCtx())
@@ -40,7 +49,13 @@ public class OfferRepository : IOfferRepository
             return _responseMapper.MapOffer(offer);
         }
     }
-
+    
+    /// <summary>
+    /// Определяет, добавлено ли предложение в избранные у пользователя.
+    /// </summary>
+    /// <param name="userId">Идентификатор пользователя.</param>
+    /// <param name="offerId">Идентификатор предложения.</param>
+    /// <returns>Возвращает true, если предложение находится в избранных у пользователя, иначе false.</returns>
     public bool IsFavoriteForUser(long userId, Guid offerId)
     {
         using (DbCtx db = new DbCtx())
@@ -50,7 +65,15 @@ public class OfferRepository : IOfferRepository
             return user.OffersNavigation.FirstOrDefault(offer => offer.Id == offerId) != null;
         }
     }
-
+    
+    /// <summary>
+    /// Получает перечень предложений с возможностью фильтрации.
+    /// </summary>
+    /// <param name="genreFilter">Необязательный фильтр по идентификатору жанра.</param>
+    /// <param name="cityFilter">Необязательный фильтр по городу.</param>
+    /// <param name="userFilter">Необязательный фильтр по идентификатору пользователя.</param>
+    /// <param name="notUserFilter">Необязательный фильтр для исключения предложений от определенного пользователя.</param>
+    /// <returns>Перечень предложений, соответствующих заданным критериям.</returns>
     public IEnumerable<Offer> GetOffers(Func<int, bool>? genreFilter = null, Func<string, bool>? cityFilter = null,
         Func<long, bool>? userFilter = null, Func<long, bool>? notUserFilter = null)
     {
@@ -94,6 +117,13 @@ public class OfferRepository : IOfferRepository
         }
     }
     
+    /// <summary>
+    /// Получает предложения по жанру с возможностью дополнительной фильтрации.
+    /// </summary>
+    /// <param name="genreId">Идентификатор жанра.</param>
+    /// <param name="cityFilter">Необязательный фильтр по городу.</param>
+    /// <param name="notUserFilter">Необязательный фильтр для исключения предложений от определенного пользователя.</param>
+    /// <returns>Перечень предложений по указанному жанру.</returns>
     public IEnumerable<Offer> GetOffersByGenre(int genreId, Func<string, bool>? cityFilter = null, Func<long, bool>? notUserFilter = null)
     {
         var filter = (Entities.Offer offer) =>
@@ -139,6 +169,11 @@ public class OfferRepository : IOfferRepository
         }
     }
 
+    /// <summary>
+    /// Получает предложения, начинающиеся с заданного названия.
+    /// </summary>
+    /// <param name="title">Начало названия для поиска.</param>
+    /// <returns>Перечень предложений с названиями, начинающимися с указанного текста.</returns>
     public IEnumerable<Offer> GetOffersByTitleStart(string title)
     {
         using (DbCtx db = new DbCtx())
@@ -156,6 +191,11 @@ public class OfferRepository : IOfferRepository
         }
     }
 
+    /// <summary>
+    /// Получает предложения по началу имени автора.
+    /// </summary>
+    /// <param name="author">Начало имени автора для поиска.</param>
+    /// <returns>Перечень предложений, авторы которых начинаются с указанного текста.</returns>
     public IEnumerable<Offer> GetOffersByAuthorStart(string author)
     {
         var searchLambda = (Entities.Offer offer) =>
@@ -186,6 +226,13 @@ public class OfferRepository : IOfferRepository
         }
     }
 
+    /// <summary>
+    /// Добавляет предложение в избранные у пользователя.
+    /// </summary>
+    /// <param name="offerId">Идентификатор предложения.</param>
+    /// <param name="userId">Идентификатор пользователя.</param>
+    /// <exception cref="OfferNotFoundException">Исключение выбрасывается, если предложение с указанным ID не найдено.</exception>
+    /// <exception cref="OfferAlreadyFavoriteException">Исключение выбрасывается, если предложение уже добавлено в избранные.</exception>
     public void AddOfferToFavorite(Guid offerId, long userId)
     {
         using (DbCtx db = new DbCtx())
@@ -214,6 +261,12 @@ public class OfferRepository : IOfferRepository
         }
     }
 
+    /// <summary>
+    /// Удаляет предложение из избранных у пользователя.
+    /// </summary>
+    /// <param name="offerId">Идентификатор предложения.</param>
+    /// <param name="userId">Идентификатор пользователя.</param>
+    /// <exception cref="OfferAlreadyNotInFavoritesException">Исключение выбрасывается, если предложения нет в избранных у пользователя.</exception>
     public void RemoveOfferFromFavorite(Guid offerId, long userId)
     {
         using (DbCtx db = new DbCtx())
@@ -231,6 +284,11 @@ public class OfferRepository : IOfferRepository
         }
     }
 
+    /// <summary>
+    /// Удаляет предложение из репозитория.
+    /// </summary>
+    /// <param name="offerId">Идентификатор предложения, которое необходимо удалить.</param>
+    /// <exception cref="OfferNotFoundException">Исключение выбрасывается, если предложение с указанным ID не найдено.</exception>
     public void RemoveOffer(Guid offerId)
     {
         // var authUser = (AuthUser)ControllerContext.HttpContext.Items["User"];
@@ -248,6 +306,13 @@ public class OfferRepository : IOfferRepository
         }
     }
 
+    /// <summary>
+    /// Проверяет, является ли пользователь владельцем предложения.
+    /// </summary>
+    /// <param name="offerId">Идентификатор предложения.</param>
+    /// <param name="userId">Идентификатор пользователя.</param>
+    /// <returns>Возвращает true, если пользователь является владельцем предложения, иначе false.</returns>
+    /// <exception cref="OfferNotFoundException">Исключение выбрасывается, если предложение с указанным ID не найдено.</exception>
     public bool IsUserOwnerOffer(Guid offerId, long userId)
     {
         using (DbCtx db = new DbCtx())
@@ -264,6 +329,11 @@ public class OfferRepository : IOfferRepository
         }
     }
 
+    /// <summary>
+    /// Получает список избранных предложений пользователя.
+    /// </summary>
+    /// <param name="userId">Идентификатор пользователя.</param>
+    /// <returns>Перечень избранных предложений пользователя.</returns>
     public IEnumerable<Offer> GetFavoriteOffers(long userId)
     {
         using (DbCtx db = new DbCtx())

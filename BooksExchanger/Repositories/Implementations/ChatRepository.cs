@@ -1,7 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+
 using BooksExchanger.Context;
 using BooksExchanger.Models;
 using BooksExchanger.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace BooksExchanger.Repositories.Implementations;
 
@@ -12,6 +13,9 @@ public class ChatRepository : IChatRepository
 {
     private ResponseMapper _responseMapper;
 
+    /// <summary>
+    /// Конструктор хранилища чатов.
+    /// </summary>
     public ChatRepository()
     {
         _responseMapper = new();

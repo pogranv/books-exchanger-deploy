@@ -1,14 +1,17 @@
 ﻿using System.Net;
 using System.Net.Mail;
 using System.Collections.Concurrent;
+
 using BooksExchanger.Models;
 using BooksExchanger.Services.Implementations.UserService.Exceptions;
 using BooksExchanger.Services.Interfaces;
-using Obshajka.VerificationCodesManager;
-using Obshajka.VerificationCodesManager.Exceptions;
+using BooksExchanger.VerificationCodesManager.Exceptions;
 
 namespace BooksExchanger.VerificationCodesManager
 {
+    /// <summary>
+    /// Сервис для кодов подтверждения.
+    /// </summary>
     public class VerificationCodeService : IVerificationCodeService
     {
 
@@ -31,6 +34,11 @@ namespace BooksExchanger.VerificationCodesManager
             s_smtpGmailSettings = SmtpGmailSettings.BuildDefault();
         }
 
+        /// <summary>
+        /// Инициализирует новый экземпляр сервиса управления верификационными кодами.
+        /// </summary>
+        /// <param name="codesLifeDurationMinutes">Время жизни кода подтверждения в минутах.</param>
+        /// <param name="emailParams">Параметры отправляемого электронного письма.</param>
         public VerificationCodeService(int codesLifeDurationMinutes, EmailParams emailParams)
         {
             _logger = LoggerFactory.Create(options => options.AddConsole()).CreateLogger<VerificationCodeService>();
@@ -46,6 +54,10 @@ namespace BooksExchanger.VerificationCodesManager
             _messageBody = emailParams.MessageBody;
         }
 
+        /// <summary>
+        /// Отправляет код подтверждения на электронную почту пользователя и запоминает его данные.
+        /// </summary>
+        /// <param name="userInfo">Краткая информация о пользователе.</param>
         public void SendCodeAndRememberUser(ShortUserInfo userInfo)
         {
             if (_emailToDetails.ContainsKey(userInfo.Email))
@@ -73,7 +85,12 @@ namespace BooksExchanger.VerificationCodesManager
             _emailToDetails[userInfo.Email] = new CodeWithDetails(userInfo, verificationCode);
         }
 
-        
+        /// <summary>
+        /// Проверяет верификационный код, отправленный пользователем, и возвращает его краткую информацию, если код верный.
+        /// </summary>
+        /// <param name="userEmail">Электронная почта пользователя.</param>
+        /// <param name="verificationCode">Верификационный код.</param>
+        /// <returns>Краткая информация о пользователе.</returns>
         public ShortUserInfo VerifyUser(string userEmail, string verificationCode)
         {
             if (string.IsNullOrEmpty(userEmail) || !_emailToDetails.ContainsKey(userEmail))
@@ -90,6 +107,10 @@ namespace BooksExchanger.VerificationCodesManager
             return codeWithDetails.User;
         }
 
+        /// <summary>
+        /// Очищает словарь от устаревших верификационных кодов.
+        /// </summary>
+        /// <param name="obj">Не используется.</param>
         private void UpdateVerificationCodes(object obj)
         {
             var toRemoveEmails = _emailToDetails.Where(item => item.Value.IsDurationOfExistsOverdue(_codesLifeTimeMinutes));

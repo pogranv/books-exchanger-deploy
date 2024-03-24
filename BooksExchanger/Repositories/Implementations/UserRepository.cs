@@ -7,14 +7,26 @@ using UserRole = BooksExchanger.Entities.UserRole;
 
 namespace BooksExchanger.Repositories.Implementations;
 
+/// <summary>
+/// Реализация репозитория пользователей.
+/// </summary>
 public class UserRepository : IUserRepository
 {
     private ResponseMapper _responseMapper;
 
+    /// <summary>
+    /// Создает экземпляр UserRepository.
+    /// </summary>
     public UserRepository()
     {
         _responseMapper = new ResponseMapper();
     }
+    
+    /// <summary>
+    /// Получает пользователя по его электронной почте.
+    /// </summary>
+    /// <param name="email">Электронная почта пользователя.</param>
+    /// <returns>Модель <see cref="Models.User"/>, если пользователь с такой почтой существует, иначе null.</returns>
     public Models.User? GetUserByEmail(string email)
     {
         using (DbCtx db = new DbCtx())
@@ -24,6 +36,14 @@ public class UserRepository : IUserRepository
         }
     }
 
+    /// <summary>
+    /// Пытается добавить нового пользователя в систему.
+    /// </summary>
+    /// <param name="name">Имя пользователя.</param>
+    /// <param name="email">Электронная почта пользователя.</param>
+    /// <param name="password">Пароль пользователя.</param>
+    /// <returns>Модель <see cref="Models.User"/> добавленного пользователя.</returns>
+    /// <exception cref="UserAlreadyExistException">Бросается, если пользователь с такой почтой уже существует.</exception>
     public Models.User TryAddNewUser(string name, string email, string password)
     {
         using (DbCtx db = new DbCtx())
@@ -40,6 +60,11 @@ public class UserRepository : IUserRepository
         }
     }
 
+    /// <summary>
+    /// Назначает роль администратора пользователю по его электронной почте.
+    /// </summary>
+    /// <param name="email">Электронная почта пользователя.</param>
+    /// <exception cref="UserNotFoundException">Бросается, если пользователь с такой почтой не найден.</exception>
     public void SetAdminByEmail(string email)
     {
         using (DbCtx db = new DbCtx())
@@ -54,6 +79,11 @@ public class UserRepository : IUserRepository
         }
     }
 
+    /// <summary>
+    /// Проверяет, существует ли пользователь по его идентификатору.
+    /// </summary>
+    /// <param name="userId">Идентификатор пользователя.</param>
+    /// <returns>true, если пользователь существует; иначе false.</returns>
     public bool IsUserExist(long userId)
     {
         using (DbCtx db = new DbCtx())

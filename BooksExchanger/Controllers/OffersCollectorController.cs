@@ -1,17 +1,13 @@
-using System.ComponentModel;
 using System.Net;
-using BooksExchanger.Context;
+
+using Microsoft.AspNetCore.Mvc;
+
 using BooksExchanger.Controllers.Specs;
 using BooksExchanger.Controllers.Specs.OffersCollector;
-using BooksExchanger.Entities;
 using BooksExchanger.Models;
 using BooksExchanger.Services.Exceptions;
-using BooksExchanger.Services.Implementations.OffersCollectorService;
 using BooksExchanger.Services.Interfaces;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Npgsql;
+
 using ModerationStatus = BooksExchanger.Models.ModerationStatus;
 
 namespace BooksExchanger.Controllers;
@@ -25,6 +21,10 @@ public class OffersCollectorController : ControllerBase
     private IOffersCollectorService _offersCollectorService;
     private ResponseMapper _responseMapper;
 
+    /// <summary>
+    /// Конструктор контроллера.
+    /// </summary>
+    /// <param name="offersCollectorService">Сервис офферов на модерации.</param>
     public OffersCollectorController(IOffersCollectorService offersCollectorService)
     {
         _offersCollectorService = offersCollectorService;

@@ -1,8 +1,12 @@
 using System.Reflection;
+
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.OpenApi.Models;
+
+using Unchase.Swashbuckle.AspNetCore.Extensions.Extensions;
+
 using BooksExchanger;
-// using BooksExchanger.Hubs;
 using BooksExchanger.MetanitHub;
-// using BooksExchanger.MetanitHub;
 using BooksExchanger.Middlewares;
 using BooksExchanger.Repositories.Implementations;
 using BooksExchanger.Repositories.Interfaces;
@@ -16,12 +20,6 @@ using BooksExchanger.Services.Implementations.OfferService;
 using BooksExchanger.Services.Implementations.UserService;
 using BooksExchanger.Services.Interfaces;
 using BooksExchanger.Settings;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.SignalR;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using Obshajka.VerificationCodesManager;
-using Unchase.Swashbuckle.AspNetCore.Extensions.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,7 +32,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("MyCorsPolicy", builder =>
-        builder.WithOrigins("http://localhost:4200") // Замените "http://example.com" адресом вашего фронтенд приложения
+        builder.WithOrigins("http://localhost:4200")
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials());
@@ -77,44 +75,10 @@ builder.Services.AddSwaggerGen(swagger =>
 });
 #endregion
 
-// builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//     .AddJwtBearer(options =>
-//     {
-//         options.RequireHttpsMetadata = false;
-//         options.TokenValidationParameters = new TokenValidationParameters
-//         {
-//             ValidateIssuer = true,
-//             ValidIssuer = AuthOptions.ISSUER,
-//             ValidateAudience = true,
-//             ValidAudience = AuthOptions.AUDIENCE,
-//             ValidateLifetime = true,
-//             IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
-//             ValidateIssuerSigningKey = true,
-//         };
-//         // options.Events = new JwtBearerEvents
-//         // {
-//         //     OnMessageReceived = context =>
-//         //     {
-//         //         // context.HttpContext.Items[""]
-//         //         var accessToken = context.Request.Query["access_token"];
-//         //
-//         //         // если запрос направлен хабу
-//         //         var path = context.HttpContext.Request.Path;
-//         //         if (!string.IsNullOrEmpty(accessToken) &&
-//         //             (path.StartsWithSegments("/chat")))
-//         //         {
-//         //             // получаем токен из строки запроса
-//         //             context.Token = accessToken;
-//         //         }
-//         //         return Task.CompletedTask;
-//         //     }
-//         // };
-//     });
 
 builder.Services.AddSignalR();
 
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
-// builder.Services.Configure<DbSettings>(builder.Configuration.GetSection("DbSettings"));
 
 builder.Services.AddSingleton<IUserIdProvider, CustomUserIdProvider>();
 builder.Services.AddScoped<IUserService, UserService>();
@@ -155,11 +119,6 @@ app.UseAuthorization();
 app.UseMiddleware<JwtMiddleware>();
 
 app.MapControllers();
-// app.UseEndpoints(endpoints =>
-// {
-//     endpoints.MapHub<ChatHub>("/chat");
-// });
-// app.MapHub<CommunicationHub>("/chat");
 app.MapHub<ChatHub>("/chat");
 
 app.Run();

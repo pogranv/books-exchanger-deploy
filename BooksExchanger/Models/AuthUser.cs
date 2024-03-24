@@ -1,5 +1,3 @@
-using BooksExchanger.Entities;
-
 namespace BooksExchanger.Models;
 
 /// <summary>

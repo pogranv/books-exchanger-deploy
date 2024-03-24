@@ -1,13 +1,12 @@
-using System.Net;
+using Microsoft.EntityFrameworkCore;
+
+using Npgsql;
+
 using BooksExchanger.Context;
-using BooksExchanger.Controllers.Specs;
-using BooksExchanger.Controllers.Specs.Books;
-using BooksExchanger.Entities;
 using BooksExchanger.Models;
 using BooksExchanger.Repositories.Exeptions;
 using BooksExchanger.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using Npgsql;
+
 using Book = BooksExchanger.Entities.Book;
 
 namespace BooksExchanger.Repositories.Implementations;
@@ -19,6 +18,9 @@ public class BookRepository : IBookRepository
 {
     private ResponseMapper _responseMapper;
 
+    /// <summary>
+    /// Конструктор хранилища книг.
+    /// </summary>
     public BookRepository()
     {
         _responseMapper = new();

@@ -8,7 +8,6 @@ using BooksExchanger.Models;
 using BooksExchanger.Services.Exceptions;
 using BooksExchanger.Services.Interfaces;
 
-
 namespace BooksExchanger.Controllers;
 
 /// <summary>
@@ -21,6 +20,10 @@ public class BooksController : ControllerBase
     private IBookService _bookService;
     private ResponseMapper _responseMapper;
 
+    /// <summary>
+    /// Конструктор контроллера.
+    /// </summary>
+    /// <param name="bookService">Сервис книг.</param>
     public BooksController(IBookService bookService)
     {
         _bookService = bookService;
