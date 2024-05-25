@@ -176,17 +176,19 @@ public class OfferRepository : IOfferRepository
     /// <returns>Перечень предложений с названиями, начинающимися с указанного текста.</returns>
     public IEnumerable<Offer> GetOffersByTitleStart(string title)
     {
+        // Избегаем загрузки объектов в памяти, поэтому отказываемся от AsEnumerable и производим
+        // фильтрацию на уровне базы данных
         using (DbCtx db = new DbCtx())
         {
             var offers = db.Offers
                 .Include(offer => offer.Book)
-                .Include(offer => offer.Book.Authors)
+                .ThenInclude(book => book.Authors)
                 .Include(offer => offer.Book.Genre)
                 .Include(offer => offer.Owner)
-                .AsEnumerable()
-                .Where(offer => offer.Book.Title.ToLower().StartsWith(title.ToLower()))
-                .ToList()
+                .Where(offer => EF.Functions.Like(offer.Book.Title, title + "%"))
+                .ToList() // Исполнение запроса к базе данных
                 .ConvertAll(_responseMapper.MapOffer);
+
             return offers;
         }
     }
@@ -198,28 +200,19 @@ public class OfferRepository : IOfferRepository
     /// <returns>Перечень предложений, авторы которых начинаются с указанного текста.</returns>
     public IEnumerable<Offer> GetOffersByAuthorStart(string author)
     {
-        var searchLambda = (Entities.Offer offer) =>
-        {
-            foreach (var bookAuthor in offer.Book.Authors)
-            {
-                if (bookAuthor.Name.ToLower().StartsWith(author.ToLower()))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        };
+        // Избегаем загрузки объектов в памяти, поэтому отказываемся от AsEnumerable и производим
+        // фильтрацию на уровне базы данных
         using (DbCtx db = new DbCtx())
         {
             var offers = db.Offers
                 .Include(offer => offer.Book)
-                .Include(offer => offer.Book.Authors)
+                .ThenInclude(book => book.Authors)
                 .Include(offer => offer.Book.Genre)
                 .Include(offer => offer.Owner)
-                .AsEnumerable()
-                .Where(offer => searchLambda(offer))
-                .ToList()
+                .Where(offer => offer.Book.Authors
+                    .Any(bookAuthor => EF.Functions.Like(bookAuthor.Name, author + "%"))
+                )   
+                .ToList() // Исполнение запроса к базе данных
                 .ConvertAll(_responseMapper.MapOffer);
 
             return offers;
