@@ -21,6 +21,11 @@ public partial class User
     /// Почта.
     /// </summary>
     public string Email { get; set; } = null!;
+    
+    /// <summary>
+    /// Соль.
+    /// </summary>
+    public string Salt { get; set; } = null!;
 
     /// <summary>
     /// Пароль.

@@ -337,6 +337,8 @@ public partial class DbCtx : DbContext
             entity.Property(e => e.Email)
                 .HasMaxLength(50)
                 .HasColumnName("email");
+            entity.Property(e => e.Salt)
+                .HasColumnName("salt");
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .HasColumnName("name");
