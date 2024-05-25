@@ -47,7 +47,7 @@ public class UserService : IUserService
             throw new UserNotFoundException("Пользователь с такой почтой не найден.");
         }
         
-        string hashedRequestPassword = PasswordHasher.HashPassword(password);
+        string hashedRequestPassword = PasswordHasher.HashPassword(password, user.Salt);
         if (hashedRequestPassword == user.Password)
         {
             return GenerateJwtToken(user);
@@ -65,7 +65,8 @@ public class UserService : IUserService
     /// <returns>Строка, содержащая JWT-токен.</returns>
     public string RegisterUser(string name, string email, string password)
     {
-        string hashedRequestPassword = PasswordHasher.HashPassword(password);
+        var salt = PasswordHasher.BuildSalt();
+        string hashedRequestPassword = PasswordHasher.HashPassword(password, salt);
         try
         {
             var user = _userRepository.TryAddNewUser(name, email, hashedRequestPassword);

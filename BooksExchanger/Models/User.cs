@@ -14,6 +14,11 @@ public class User
     /// email пользователя.
     /// </summary>
     public string Email { get; set; }
+    
+    /// <summary>
+    /// Соль пароля пользователя.
+    /// </summary>
+    public string Salt { get; set; }
 
     /// <summary>
     /// Пароль пользователя.
